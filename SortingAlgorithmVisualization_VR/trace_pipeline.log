@@ -1,0 +1,1154 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-sande" at "2026-10-19T14:23:48.5838298Z"
+[Licensing::Client] Error: Code 10 while verifying Licensing Client signature (process Id: 14772, path: "C:/Program Files/Unity Hub/UnityLicensingClient_V1/Unity.Licensing.Client.exe")
+[Licensing::Module] Error: LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.3+d7ffd15
+  Session Id:              798739bced43463a90b05ccacdbfd5f6
+  Correlation Id:          ff326c3e7dc2d0930ea142ce4799cda9
+  External correlation Id: 8222772089562951536
+  Machine Id:              GN2X+8hULDQ8nwwxwEtLvoxOJqE=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-sande" (connect: 0.00s, validation: 0.01s, handshake: 0.05s)
+[Licensing::IpcConnector] Successfully connected to the License Notification on channel: "LicenseClient-sande-notifications" at "2026-10-19T14:23:48.647414Z"
+Entitlement-based licensing initiated
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully updated license
+Built from '2021.3/respin/2021.3.45f2-0da89fac8e' branch; Version is '2021.3.45f2 (88f88f591b2e) revision 8976527'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.26200) 64bit Core' Language: 'en' Physical Memory: 32435 MB
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Serial number assigned to: "13469985608627-UnityPersXXXX"
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Server::Start -- Port 52012 was selected
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.3.45f2\Editor\Unity.exe
+-batchmode
+-quit
+-projectPath
+C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR
+-executeMethod
+TraceGrabPipelineDiagnostic.RunDiagnostic
+-logFile
+C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\trace_pipeline.log
+Successfully changed project path to: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR
+C:/Users/sande/OneDrive/Desktop/CGVR/SortingAlgorithmVisualization_VR
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [17252] Host "[IP] 192.168.1.4 [Port] 55496 [Flags] 2 [Guid] 2070070295 [EditorId] 2070070295 [Version] 1048832 [Id] WindowsEditor(7,Sandeep) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [17252] Host "[IP] 192.168.1.4 [Port] 55496 [Flags] 2 [Guid] 2070070295 [EditorId] 2070070295 [Version] 1048832 [Id] WindowsEditor(7,Sandeep) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+[Physics::Module] Initialized MultithreadedJobDispatcher with {0} workers.
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] 
+Registered 55 packages:
+  Packages from [https://packages.unity.com]:
+    com.unity.collab-proxy@2.5.2 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.collab-proxy@2.5.2)
+    com.unity.connect.share@4.2.3 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.connect.share@4.2.3)
+    com.unity.ide.rider@3.0.31 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.ide.rider@3.0.31)
+    com.unity.ide.visualstudio@2.0.22 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.ide.visualstudio@2.0.22)
+    com.unity.ide.vscode@1.2.5 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.ide.vscode@1.2.5)
+    com.unity.inputsystem@1.7.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.inputsystem@1.7.0)
+    com.unity.nuget.newtonsoft-json@3.2.1 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1)
+    com.unity.test-framework@1.1.33 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.test-framework@1.1.33)
+    com.unity.textmeshpro@3.0.6 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.textmeshpro@3.0.6)
+    com.unity.timeline@1.6.5 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.timeline@1.6.5)
+    com.unity.xr.core-utils@2.3.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.xr.core-utils@2.3.0)
+    com.unity.xr.interaction.toolkit@2.6.3 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.xr.interaction.toolkit@2.6.3)
+    com.unity.xr.management@4.5.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.xr.management@4.5.0)
+    com.unity.xr.openxr@1.13.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.xr.openxr@1.13.0)
+    com.unity.xr.legacyinputhelpers@2.1.11 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.xr.legacyinputhelpers@2.1.11)
+    com.unity.mathematics@1.2.6 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.mathematics@1.2.6)
+    com.unity.ext.nunit@1.0.6 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.ext.nunit@1.0.6)
+    com.unity.editorcoroutines@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.editorcoroutines@1.0.0)
+    com.unity.settings-manager@1.0.3 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.settings-manager@1.0.3)
+  Built-in packages:
+    com.unity.2d.sprite@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.2d.sprite@1.0.0)
+    com.unity.ugui@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.ugui@1.0.0)
+    com.unity.modules.ai@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.ai@1.0.0)
+    com.unity.modules.androidjni@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.androidjni@1.0.0)
+    com.unity.modules.animation@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.animation@1.0.0)
+    com.unity.modules.assetbundle@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.assetbundle@1.0.0)
+    com.unity.modules.audio@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.audio@1.0.0)
+    com.unity.modules.cloth@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.cloth@1.0.0)
+    com.unity.modules.director@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.director@1.0.0)
+    com.unity.modules.imageconversion@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.imageconversion@1.0.0)
+    com.unity.modules.imgui@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.imgui@1.0.0)
+    com.unity.modules.jsonserialize@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.jsonserialize@1.0.0)
+    com.unity.modules.particlesystem@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.particlesystem@1.0.0)
+    com.unity.modules.physics@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.physics@1.0.0)
+    com.unity.modules.physics2d@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.physics2d@1.0.0)
+    com.unity.modules.screencapture@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.screencapture@1.0.0)
+    com.unity.modules.terrain@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.terrain@1.0.0)
+    com.unity.modules.terrainphysics@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.terrainphysics@1.0.0)
+    com.unity.modules.tilemap@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.tilemap@1.0.0)
+    com.unity.modules.ui@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.ui@1.0.0)
+    com.unity.modules.uielements@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.uielements@1.0.0)
+    com.unity.modules.umbra@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.umbra@1.0.0)
+    com.unity.modules.unityanalytics@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.unityanalytics@1.0.0)
+    com.unity.modules.unitywebrequest@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.unitywebrequest@1.0.0)
+    com.unity.modules.unitywebrequestassetbundle@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.unitywebrequestassetbundle@1.0.0)
+    com.unity.modules.unitywebrequestaudio@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.unitywebrequestaudio@1.0.0)
+    com.unity.modules.unitywebrequesttexture@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.unitywebrequesttexture@1.0.0)
+    com.unity.modules.unitywebrequestwww@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.unitywebrequestwww@1.0.0)
+    com.unity.modules.vehicles@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.vehicles@1.0.0)
+    com.unity.modules.video@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.video@1.0.0)
+    com.unity.modules.vr@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.vr@1.0.0)
+    com.unity.modules.wind@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.wind@1.0.0)
+    com.unity.modules.xr@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.xr@1.0.0)
+    com.unity.modules.subsystems@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.subsystems@1.0.0)
+    com.unity.modules.uielementsnative@1.0.0 (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.modules.uielementsnative@1.0.0)
+  Git packages:
+    com.cysharp.unitask@https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask (location: C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.cysharp.unitask@a77a1b4a89)
+
+[Subsystems] Looking for new subsystems at path C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.xr.openxr@1.13.0
+[Subsystems] Novel subsystem found at Library/PackageCache/com.unity.xr.openxr@1.13.0/Runtime/UnitySubsystemsManifest.json
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.45f2/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/sande/OneDrive/Desktop/CGVR/SortingAlgorithmVisualization_VR/Assets
+[Subsystems] Discovering subsystems at path C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.xr.openxr@1.13.0
+[Subsystems] No descriptors matched for  examples in Library/PackageCache/com.unity.xr.openxr@1.13.0/Runtime/UnitySubsystemsManifest.json.
+[Subsystems] 1 'inputs' descriptors matched in Library/PackageCache/com.unity.xr.openxr@1.13.0/Runtime/UnitySubsystemsManifest.json
+[Subsystems] 1 'displays' descriptors matched in Library/PackageCache/com.unity.xr.openxr@1.13.0/Runtime/UnitySubsystemsManifest.json
+[Subsystems] No descriptors matched for  meshings in Library/PackageCache/com.unity.xr.openxr@1.13.0/Runtime/UnitySubsystemsManifest.json.
+Package Manager log level set to [2]
+[Package Manager] Done registering packages in 0.29s seconds
+Refreshing native plugins compatible for Editor in 42.64 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.45f2 (88f88f591b2e)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.45f2/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/sande/OneDrive/Desktop/CGVR/SortingAlgorithmVisualization_VR/Assets
+[Subsystems] Discovering subsystems at path C:\Users\sande\OneDrive\Desktop\CGVR\SortingAlgorithmVisualization_VR\Library\PackageCache\com.unity.xr.openxr@1.13.0
+[Subsystems] No descriptors matched for  examples in Library/PackageCache/com.unity.xr.openxr@1.13.0/Runtime/UnitySubsystemsManifest.json.
+[Subsystems] 1 'inputs' descriptors matched in Library/PackageCache/com.unity.xr.openxr@1.13.0/Runtime/UnitySubsystemsManifest.json
+[Subsystems] 1 'displays' descriptors matched in Library/PackageCache/com.unity.xr.openxr@1.13.0/Runtime/UnitySubsystemsManifest.json
+[Subsystems] No descriptors matched for  meshings in Library/PackageCache/com.unity.xr.openxr@1.13.0/Runtime/UnitySubsystemsManifest.json.
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) UHD Graphics (ID=0x9b41)
+    Vendor:   Intel
+    VRAM:     16217 MB
+    Driver:   31.0.101.2135
+[Licensing::Client] Successfully resolved entitlement details
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.45f2/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.45f2/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.45f2/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56504
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.45f2/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.009278 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 4.95 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.962 seconds
+Domain Reload Profiling:
+	ReloadAssembly (963ms)
+		BeginReloadAssembly (178ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (617ms)
+			LoadAssemblies (174ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (177ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (48ms)
+			SetupLoadedEditorAssemblies (325ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (12ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (5ms)
+				BeforeProcessingInitializeOnLoad (3ms)
+				ProcessInitializeOnLoadAttributes (225ms)
+				ProcessInitializeOnLoadMethodAttributes (80ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+Registering precompiled user dll's ...
+Registered in 0.013182 seconds.
+Start importing Assets/Scripts/VR/SortingChallenge/TableSurfaceGrabTransformer.cs using Guid(f086c085fa8ba184f83e8a7086a46418) Importer(-1,00000000000000000000000000000000) There are inconsistent line endings in the 'Assets/Scripts/VR/SortingChallenge/TableSurfaceGrabTransformer.cs' script. Some are Mac OS X (UNIX) and some are Windows.
+This might lead to incorrect line numbers in stacktraces and compiler errors. Many text editors can fix this using Convert Line Endings menu commands.
+ -> (artifact id: '43f300bd9b715cd65004d77c6665dfb0') in 0.035801 seconds 
+Start importing Assets/Editor/TraceGrabPipelineDiagnostic.cs using Guid(444fed4d69e2f524b926a1a5fb52bdea) Importer(-1,00000000000000000000000000000000) There are inconsistent line endings in the 'Assets/Editor/TraceGrabPipelineDiagnostic.cs' script. Some are Mac OS X (UNIX) and some are Windows.
+This might lead to incorrect line numbers in stacktraces and compiler errors. Many text editors can fix this using Convert Line Endings menu commands.
+ -> (artifact id: '8f86233e23e86cac70989a9be9373580') in 0.054255 seconds 
+Start importing Assets/Scripts/VR/SortingChallenge/SortingChallengeCube.cs using Guid(ba4588534e6d37e4487c6cc3d79097ac) Importer(-1,00000000000000000000000000000000)  -> (artifact id: '611721b66b8c4c688bce5c20f72f944b') in 0.015088 seconds 
+[ScriptCompilation] Requested script compilation because: Assetdatabase observed changes in script compilation related files
+Starting: C:\Program Files\Unity\Hub\Editor\2021.3.45f2\Editor\Data\bee_backend.exe --profile="Library/Bee/backend_profiler0.traceevents" --stdin-canary --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure ScriptAssemblies
+WorkingDir: C:/Users/sande/OneDrive/Desktop/CGVR/SortingAlgorithmVisualization_VR
+ExitCode: 4 Duration: 0s87ms
+Rebuilding DAG because FileSignature timestamp changed: Library/Bee/1900b0aE-inputdata.json
+*** Tundra requires additional run (0.02 seconds), 0 items updated, 0 evaluated
+Starting: C:\Program Files\Unity\Hub\Editor\2021.3.45f2\Editor\Data\Tools\netcorerun\netcorerun.exe "C:\Program Files\Unity\Hub\Editor\2021.3.45f2\Editor\Data\Tools\BuildPipeline\ScriptCompilationBuildProgram.exe" "Library/Bee/1900b0aE.dag.json" "Library/Bee/1900b0aE-inputdata.json" "Library/Bee/buildprogram0.traceevents"
+WorkingDir: C:/Users/sande/OneDrive/Desktop/CGVR/SortingAlgorithmVisualization_VR
+ExitCode: 0 Duration: 0s776ms
+Starting: C:\Program Files\Unity\Hub\Editor\2021.3.45f2\Editor\Data\bee_backend.exe --profile="Library/Bee/backend_profiler1.traceevents" --stdin-canary --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure --dagfilejson="Library/Bee/1900b0aE.dag.json" ScriptAssemblies
+WorkingDir: C:/Users/sande/OneDrive/Desktop/CGVR/SortingAlgorithmVisualization_VR
+ExitCode: 0 Duration: 31s
+Finished compiling graph: 531 nodes, 6704 flattened edges (6704 ToBuild, 0 ToUse), maximum node priority 194
+[           0s] Delete 89 artifact files that are no longer in use. (like Library\Bee\artifacts\mvdfrm\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll_86CE7F102146F200.mvfrm)
+[  8/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.InputSystem.rsp
+[  9/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UnityEngine.TestRunner.rsp
+[ 10/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UnityEngine.SpatialTracking.rsp
+[ 11/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UnityEditor.TestRunner.rsp
+[ 12/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.rsp
+[ 13/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Management.rsp
+[ 14/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.rsp
+[ 15/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.VirtualTexturingModule.dll_753764C04DE9BB69.mvfrm
+[ 16/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.WindModule.dll_C3D5A1227F787EF4.mvfrm
+[ 17/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.XRModule.dll_39EBE726A73D5036.mvfrm
+[ 18/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.VRModule.dll_072D24221E0302D8.mvfrm
+[ 19/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityWebRequestWWWModule.dll_7A96BD2814848F33.mvfrm
+[ 20/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.VehiclesModule.dll_55F9991907A66903.mvfrm
+[ 21/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.DiagnosticsModule.dll_8C50B07CA6E8886F.mvfrm
+[ 22/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.VFXModule.dll_06B127517F385C10.mvfrm
+[ 23/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.VideoModule.dll_64F378F7DEE3A2A3.mvfrm
+[ 24/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.dll_9DAB410733701635.mvfrm
+[ 25/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.DeviceSimulatorModule.dll_55D87ED1DA825661.mvfrm
+[ 26/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.CoreModule.dll_2A65F2A7463C9560.mvfrm
+[ 27/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.GraphViewModule.dll_CF263EC52ED67466.mvfrm
+[ 28/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.PackageManagerUIModule.dll_0630FBBC03C2CABC.mvfrm
+[ 29/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.SceneTemplateModule.dll_7E780F0C7AF0AC49.mvfrm
+[ 30/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.QuickSearchModule.dll_17603189FFBF84C8.mvfrm
+[ 31/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.TextCoreFontEngineModule.dll_E98CC60782435ADE.mvfrm
+[ 32/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.TextCoreTextEngineModule.dll_3174FC7911C713FC.mvfrm
+[ 33/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.GIModule.dll_5123A87CBBB05FCE.mvfrm
+[ 34/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.UIBuilderModule.dll_23AEEBE1A18EED9A.mvfrm
+[ 35/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.UIServiceModule.dll_5CA0FD448AC63DB4.mvfrm
+[ 36/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.UIElementsModule.dll_E86BB7CC4FE8A89C.mvfrm
+[ 37/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.UIElementsSamplesModule.dll_6B0C0ED841BC7691.mvfrm
+[ 38/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.UnityConnectModule.dll_5A0EBEC9576BF416.mvfrm
+[ 39/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.AccessibilityModule.dll_B11D7AA37B66D3E6.mvfrm
+[ 40/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.AIModule.dll_B8E75F6F200177B4.mvfrm
+[ 41/530    4s] Csc Library/Bee/artifacts/1900b0aE.dag/UnityEngine.TestRunner.dll (+2 others)
+[ 42/530    4s] Csc Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.dll (+2 others)
+[ 43/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.ARModule.dll_725A24727D1ED67D.mvfrm
+[ 44/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.AnimationModule.dll_9DABBAEE0933490C.mvfrm
+[ 45/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.AndroidJNIModule.dll_66B4A09F99081772.mvfrm
+[ 46/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.AssetBundleModule.dll_5B49647B622639BA.mvfrm
+[ 47/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.AudioModule.dll_3FE9F48D1C5186FE.mvfrm
+[ 48/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.ClothModule.dll_A6D25187F66E65E2.mvfrm
+[ 49/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityWebRequestModule.dll_D916469DD756B658.mvfrm
+[ 50/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityWebRequestAudioModule.dll_A517BA736081AAE2.mvfrm
+[ 51/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.SharedInternalsModule.dll_4B887DC943901729.mvfrm
+[ 52/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityTestProtocolModule.dll_26CEC4CA9BB7CBE7.mvfrm
+[ 53/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityCurlModule.dll_D0C85C1F79473AF9.mvfrm
+[ 54/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.ClusterInputModule.dll_D9AB33DF08F3C6DC.mvfrm
+[ 55/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityWebRequestTextureModule.dll_BFF3C691FE1B50F7.mvfrm
+[ 56/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.ClusterRendererModule.dll_5B8541434A3D63E5.mvfrm
+[ 57/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.CrashReportingModule.dll_5EBC6D805666D903.mvfrm
+[ 58/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.CoreModule.dll_4D86C5F9EE42008B.mvfrm
+[ 59/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.DirectorModule.dll_DE369F998D7C9968.mvfrm
+[ 60/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.dll_D04F87DF91E3A31A.mvfrm
+[ 61/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.DSPGraphModule.dll_E3880102FFDD6A89.mvfrm
+[ 62/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.GameCenterModule.dll_9101EABA5F490863.mvfrm
+[ 63/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/UnityEditor.TestRunner.dll (+2 others)
+[ 64/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.GridModule.dll_2AF7E1E806969682.mvfrm
+[ 65/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.HotReloadModule.dll_1EF478F3E466648E.mvfrm
+[ 66/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.ImageConversionModule.dll_C7773EF3CC621BD9.mvfrm
+[ 67/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.IMGUIModule.dll_784993F3E2831ADF.mvfrm
+[ 68/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.InputModule.dll_A65FBC3D9289ABA2.mvfrm
+[ 69/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.InputLegacyModule.dll_EC8E7F99FA17EFAB.mvfrm
+[ 70/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.JSONSerializeModule.dll_113503DF7AA23470.mvfrm
+[ 71/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityAnalyticsCommonModule.dll_C85A23D8F3FF7EA8.mvfrm
+[ 72/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityAnalyticsModule.dll_D16E2796709FB68D.mvfrm
+[ 73/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.LocalizationModule.dll_17F7FE31A06FB9D5.mvfrm
+[ 74/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityConnectModule.dll_476E42D851F3F4C1.mvfrm
+[ 75/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.ParticleSystemModule.dll_B1CEB6CCC4786491.mvfrm
+[ 76/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.dll (+2 others)
+[ 77/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.Physics2DModule.dll_EA51AADEAA3040A1.mvfrm
+[ 78/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.PerformanceReportingModule.dll_2D1B6694DA16E04A.mvfrm
+[ 79/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.PhysicsModule.dll_70B0EE873EED1D8F.mvfrm
+[ 80/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll_FF36B3B06294736A.mvfrm
+[ 81/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.ProfilerModule.dll_107CD8D026D62075.mvfrm
+[ 82/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.ScreenCaptureModule.dll_2B1CB1648F0E60D2.mvfrm
+[ 83/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityWebRequestAssetBundleModule.dll_1E24B1B509AE7B1E.mvfrm
+[ 84/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.SpriteMaskModule.dll_7A2E5D4A80B89DDD.mvfrm
+[ 85/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.SpriteShapeModule.dll_74AA91D617C871C4.mvfrm
+[ 86/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.StreamingModule.dll_5240A83E58BB004A.mvfrm
+[ 87/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.SubstanceModule.dll_2EEBBC87A40DFE58.mvfrm
+[ 88/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Management.dll (+2 others)
+[ 89/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.SubsystemsModule.dll_E4DBC3AC4F0085F0.mvfrm
+[ 90/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/UnityEngine.SpatialTracking.dll (+2 others)
+[ 91/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.TerrainModule.dll_8AF769F614AB667D.mvfrm
+[ 92/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.TerrainPhysicsModule.dll_B2495F9FDDBB5F1E.mvfrm
+[ 93/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.TextCoreFontEngineModule.dll_67EC415A954119A9.mvfrm
+[ 94/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.TextCoreTextEngineModule.dll_AFD477CC24C4D2C7.mvfrm
+[ 95/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.TextRenderingModule.dll_545C236F4645E0C7.mvfrm
+[ 96/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UIElementsNativeModule.dll_50AAB051753B3ADE.mvfrm
+[ 98/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UmbraModule.dll_BABEA0A5A9783271.mvfrm
+[ 99/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.TilemapModule.dll_29F3D1772C684786.mvfrm
+[100/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Management.Editor.rsp
+[101/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.TLSModule.dll_85D28EE2A8CAF2A3.mvfrm
+[102/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UIElementsModule.dll_E91A2514522CC1E7.mvfrm
+[103/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UIModule.dll_B45AFD9C7C487D60.mvfrm
+[105/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.CoreUtils.rsp
+[106/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UNETModule.dll_E02D0DE33B50F604.mvfrm
+[107/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.WindowsStandalone.Extensions.dll_C2EB71B726C29240.mvfrm
+[108/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.rsp
+[111/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.Mathematics.rsp
+[112/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.CoreUtils.Editor.rsp
+[114/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UnityEngine.XR.LegacyInputHelpers.rsp
+[116/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.Graphs.dll_FD1D9E43A9A9BF92.mvfrm
+[117/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UI.ref.dll_08FEAA520A2EFD60.mvfrm
+[119/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.rsp
+[120/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Editor.rsp
+[122/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.MetaQuestSupport.rsp
+[123/530    4s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.InputSystem.dll (+2 others)
+[124/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.UI.ref.dll_4C98D3F7040CD4F5.mvfrm
+[126/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Plastic.Newtonsoft.Json.dll_24E54DB3DC08B2C0.mvfrm
+[127/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Plastic.Antlr3.Runtime.dll_C906538E153079A5.mvfrm
+[129/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/LeanCommon.rsp
+[130/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.TestRunner.ref.dll_E55D0F7C63F01D9E.mvfrm
+[132/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UniTask.rsp
+[134/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.TextMeshPro.rsp
+[136/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Management.Editor.dll (+2 others)
+[137/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.TestRunner.ref.dll_193EC4CE382CBFB3.mvfrm
+[138/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.Timeline.rsp
+[139/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.Editor.rsp
+[140/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.InternalAPIEditorBridgeDev.001.rsp
+[141/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.EditorCoroutines.Editor.rsp
+[145/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.OculusQuestSupport.rsp
+[147/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/UnityEngine.XR.LegacyInputHelpers.dll (+2 others)
+[149/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.NVIDIAModule.dll_2C170CCC74C68457.mvfrm
+[150/530    2s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.XR.CoreUtils.dll (+2 others)
+[151/530    2s] Csc Library/Bee/artifacts/1900b0aE.dag/LeanCommon.dll (+2 others)
+[152/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.InternalAPIEditorBridgeDev.001.dll (+2 others)
+[154/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.RuntimeDebugger.rsp
+[155/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/LeanLocalization.rsp
+[157/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.Settings.Editor.rsp
+[158/530    3s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.dll (+2 others)
+[159/530    2s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.EditorCoroutines.Editor.dll (+2 others)
+[160/530    2s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.XR.CoreUtils.Editor.dll (+2 others)
+[161/530    4s] Csc Library/Bee/artifacts/1900b0aE.dag/UniTask.dll (+2 others)
+[162/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.Settings.Editor.dll (+2 others)
+[164/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.PlasticSCM.Editor.rsp
+[166/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.Timeline.Editor.rsp
+[167/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.Samples.StarterAssets.rsp
+[171/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.OculusQuestSupport.Editor.rsp
+[172/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.RuntimeDebugger.Editor.rsp
+[173/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.MetaQuestSupport.dll (+2 others)
+[174/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UnityEditor.XR.LegacyInputHelpers.rsp
+[175/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.2D.Sprite.Editor.rsp
+[179/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UnityEditor.SpatialTracking.rsp
+[180/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.InputSystem.ForUI.rsp
+[182/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.Samples.StarterAssets.Editor.rsp
+[184/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.Samples.DeviceSimulator.rsp
+[186/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.Mathematics.Editor.rsp
+[189/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.Play.Publisher.Editor.rsp
+[191/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.MetaQuestSupport.Editor.rsp
+[193/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.Rider.Editor.rsp
+[195/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.ConformanceAutomation.rsp
+[196/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.VisualStudio.Editor.rsp
+[198/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.TextMeshPro.Editor.rsp
+[200/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.rsp
+[202/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UniTask.DOTween.rsp
+[204/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UniTask.TextMeshPro.rsp
+[207/530    2s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.Timeline.dll (+2 others)
+[208/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UniTask.Linq.rsp
+[210/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UniTask.Addressables.rsp
+[212/530    4s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.TextMeshPro.dll (+2 others)
+[213/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/LeanLocalizationEditor.rsp
+[214/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/LeanLocalization.dll (+2 others)
+[215/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.InputSystem.ref.dll_FD2EC87C14EBE081.mvfrm
+[216/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Editor.dll (+2 others)
+[217/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.XR.OpenXR.ref.dll_18763C29B6421920.mvfrm
+[218/530    6s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.Mathematics.dll (+2 others)
+[219/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.OculusQuestSupport.dll (+2 others)
+[220/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.Play.Publisher.Editor.dll (+2 others)
+[221/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.TextMeshPro.Editor.dll (+2 others)
+[222/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.2D.Sprite.Editor.dll (+2 others)
+[223/530    2s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.PlasticSCM.Editor.dll (+2 others)
+[224/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.RuntimeDebugger.dll (+2 others)
+[225/530    2s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.ConformanceAutomation.dll (+2 others)
+[226/530    2s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.MetaQuestSupport.Editor.dll (+2 others)
+[227/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/UnityEditor.SpatialTracking.dll (+2 others)
+[228/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.InputSystem.ForUI.dll (+2 others)
+[229/530    2s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.Rider.Editor.dll (+2 others)
+[230/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.Mathematics.Editor.dll (+2 others)
+[231/530    3s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.dll (+2 others)
+[232/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/UnityEditor.XR.LegacyInputHelpers.dll (+2 others)
+[233/530    3s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.Timeline.Editor.dll (+2 others)
+[234/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.dll (+2 others)
+[235/530    0s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.RuntimeDebugger.Editor.dll (+2 others)
+[236/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.VisualStudio.Editor.dll (+2 others)
+[237/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.OculusQuestSupport.Editor.dll (+2 others)
+[238/530    0s] Csc Library/Bee/artifacts/1900b0aE.dag/UniTask.Addressables.dll (+2 others)
+[239/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/LeanLocalizationEditor.dll (+2 others)
+[240/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.Samples.DeviceSimulator.dll (+2 others)
+[242/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.rsp
+[243/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.Samples.StarterAssets.dll (+2 others)
+[244/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.Editor.dll (+2 others)
+[245/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/UniTask.DOTween.dll (+2 others)
+[246/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.XR.CoreUtils.ref.dll_3CA2B461938B5BFC.mvfrm
+[247/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/UniTask.TextMeshPro.dll (+2 others)
+[248/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.SpatialTracking.ref.dll_1552DC8EFC971715.mvfrm
+[249/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.XR.Management.ref.dll_404BC0C35449934F.mvfrm
+[250/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.XR.OpenXR.Editor.ref.dll_A75B1C5B45FBE091.mvfrm
+[251/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.XR.Interaction.Toolkit.ref.dll_96C656129EF9A05C.mvfrm
+[252/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Mathematics.ref.dll_E8EFDB1B8D5C174E.mvfrm
+[253/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.MockRuntime.rsp
+[255/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.XR.CoreUtils.Editor.ref.dll_ABFC049C4594FF75.mvfrm
+[256/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.Samples.StarterAssets.Editor.dll (+2 others)
+[257/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UniTask.Editor.rsp
+[259/530    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.XR.Management.Editor.ref.dll_7BA8CC5454F13E52.mvfrm
+[260/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.XR.LegacyInputHelpers.ref.dll_FFA26A0728B3CF82.mvfrm
+[261/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.InputSystem.TestFramework.rsp
+[263/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.TextMeshPro.ref.dll_84A4293DBDD182DB.mvfrm
+[265/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.CollabProxy.Editor.rsp
+[266/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.rsp
+[268/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.XR.OpenXR.Features.MetaQuestSupport.ref.dll_D1907459A4C188F5.mvfrm
+[269/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Timeline.ref.dll_621CDDF9C514DF8F.mvfrm
+[270/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.XR.Interaction.Toolkit.Editor.ref.dll_13D11C44DBE92115.mvfrm
+[271/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.XR.OpenXR.Features.OculusQuestSupport.ref.dll_9101E0597D5BC8D9.mvfrm
+[272/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.PlasticSCM.Editor.ref.dll_257AEB342BE77856.mvfrm
+[273/530    2s] Csc Library/Bee/artifacts/1900b0aE.dag/UniTask.Linq.dll (+2 others)
+[274/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.EditorCoroutines.Editor.ref.dll_34ED10A34098B2DB.mvfrm
+[275/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.InternalAPIEditorBridgeDev.001.ref.dll_E984A7896F18F703.mvfrm
+[276/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.XR.OpenXR.Features.OculusQuestSupport.Editor.ref.dll_FEFB5585E8396F68.mvfrm
+[277/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.XR.Interaction.Toolkit.Samples.DeviceSimulator.ref.dll_62B10D93E579B8A7.mvfrm
+[278/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.TextMeshPro.Editor.ref.dll_159E061D77A10B86.mvfrm
+[279/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.SpatialTracking.ref.dll_8911EA67839E93F0.mvfrm
+[280/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.XR.Interaction.Toolkit.Samples.StarterAssets.Editor.ref.dll_CE8B080C07253616.mvfrm
+[281/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.2D.Sprite.Editor.ref.dll_DDBAA27A82CE9E28.mvfrm
+[282/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Timeline.Editor.ref.dll_0D3D3C0B73557612.mvfrm
+[283/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Rider.Editor.ref.dll_9B5591808ABA37AF.mvfrm
+[284/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.XR.Interaction.Toolkit.Samples.StarterAssets.ref.dll_47844EB97FE7EF4B.mvfrm
+[285/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll (+2 others)
+Assets\Scripts\VR\SortingChallenge\TableSurfaceGrabTransformer.cs(30,22): warning CS0108: 'TableSurfaceGrabTransformer.Awake()' hides inherited member 'XRGeneralGrabTransformer.Awake()'. Use the new keyword if hiding was intended.
+[286/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.VisualStudio.Editor.ref.dll_3A975DBA53ABA4AD.mvfrm
+[287/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.XR.OpenXR.Features.MetaQuestSupport.Editor.ref.dll_9D3FA5F897E3A50C.mvfrm
+[288/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.XR.OpenXR.Features.RuntimeDebugger.Editor.ref.dll_C24E087EF9B388C5.mvfrm
+[289/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.XR.LegacyInputHelpers.ref.dll_3F12D550ED6E7C7D.mvfrm
+[290/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.VSCode.Editor.ref.dll_3628369EB48E4C19.mvfrm
+[291/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Play.Publisher.Editor.ref.dll_EAD9EA318D2F5031.mvfrm
+[292/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Mathematics.Editor.ref.dll_9A20CFD48BC11F43.mvfrm
+[293/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.InputSystem.ForUI.ref.dll_0478B67D1094CE70.mvfrm
+[294/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.XR.OpenXR.Features.ConformanceAutomation.ref.dll_01FEA043C7470D3F.mvfrm
+[295/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UnityEngine.SpatialTracking.dll.mvfrm.rsp
+[296/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.MetaQuestSupport.Editor.dll.mvfrm.rsp
+[297/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.CollabProxy.Editor.dll.mvfrm.rsp
+[298/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.Mathematics.Editor.dll.mvfrm.rsp
+[299/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/LeanCommon.dll.mvfrm.rsp
+[300/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UniTask.Addressables.dll.mvfrm.rsp
+[301/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UniTask.DOTween.dll.mvfrm.rsp
+[302/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UniTask.Editor.dll.mvfrm.rsp
+[303/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UniTask.Linq.dll.mvfrm.rsp
+[304/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UniTask.TextMeshPro.dll.mvfrm.rsp
+[305/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/LeanLocalizationEditor.dll.mvfrm.rsp
+[306/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.InputSystem.ForUI.dll.mvfrm.rsp
+[307/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.OculusQuestSupport.Editor.dll.mvfrm.rsp
+[308/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.dll.mvfrm.rsp
+[309/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.CoreUtils.Editor.dll.mvfrm.rsp
+[310/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.InternalAPIEditorBridgeDev.001.dll.mvfrm.rsp
+[311/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.InputSystem.dll.mvfrm.rsp
+[312/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.dll.mvfrm.rsp
+[313/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.2D.Sprite.Editor.dll.mvfrm.rsp
+[314/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll.mvfrm.rsp
+[315/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.InputSystem.TestFramework.dll.mvfrm.rsp
+[316/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/LeanLocalization.dll.mvfrm.rsp
+[317/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.Mathematics.dll.mvfrm.rsp
+[318/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Editor.dll.mvfrm.rsp
+[319/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.EditorCoroutines.Editor.dll.mvfrm.rsp
+[320/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.RuntimeDebugger.Editor.dll.mvfrm.rsp
+[321/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Management.dll.mvfrm.rsp
+[322/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.MockRuntime.dll.mvfrm.rsp
+[323/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UniTask.dll.mvfrm.rsp
+[324/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UnityEditor.TestRunner.dll.mvfrm.rsp
+[325/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll.mvfrm.rsp
+[326/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.Play.Publisher.Editor.dll.mvfrm.rsp
+[327/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.VisualStudio.Editor.dll.mvfrm.rsp
+[328/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UnityEditor.XR.LegacyInputHelpers.dll.mvfrm.rsp
+[329/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.Samples.StarterAssets.Editor.dll.mvfrm.rsp
+[330/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.TextMeshPro.Editor.dll.mvfrm.rsp
+[331/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.dll.mvfrm.rsp
+[332/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.RuntimeDebugger.dll.mvfrm.rsp
+[333/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.OculusQuestSupport.dll.mvfrm.rsp
+[334/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.dll.mvfrm.rsp
+[335/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UnityEngine.TestRunner.dll.mvfrm.rsp
+[336/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.CoreUtils.dll.mvfrm.rsp
+[337/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.TextMeshPro.dll.mvfrm.rsp
+[338/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.Editor.dll.mvfrm.rsp
+[339/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Management.Editor.dll.mvfrm.rsp
+[340/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.Rider.Editor.dll.mvfrm.rsp
+[341/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.Samples.StarterAssets.dll.mvfrm.rsp
+[342/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UnityEditor.SpatialTracking.dll.mvfrm.rsp
+[343/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.Timeline.Editor.dll.mvfrm.rsp
+[344/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.MetaQuestSupport.dll.mvfrm.rsp
+[345/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.ConformanceAutomation.dll.mvfrm.rsp
+[346/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.PlasticSCM.Editor.dll.mvfrm.rsp
+[347/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.Samples.DeviceSimulator.dll.mvfrm.rsp
+[348/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.Settings.Editor.dll.mvfrm.rsp
+[349/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/UnityEngine.XR.LegacyInputHelpers.dll.mvfrm.rsp
+[350/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.Timeline.dll.mvfrm.rsp
+[351/530    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.dll.mvfrm.rsp
+[352/530    0s] Csc Library/Bee/artifacts/1900b0aE.dag/UniTask.Editor.dll (+2 others)
+[353/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Settings.Editor.ref.dll_7F5B154C05A780B0.mvfrm
+[356/530    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.XR.OpenXR.Features.RuntimeDebugger.ref.dll_355FB68661407DAC.mvfrm
+[357/530    0s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll (+2 others)
+Assets\Editor\Stage6BuildAndIntegrationVerifier.cs(95,18): warning CS0219: The variable 'mainSceneConfigured' is assigned but its value is never used
+
+Assets\Editor\Stage6BuildAndIntegrationVerifier.cs(96,18): warning CS0219: The variable 'collisionLabConfigured' is assigned but its value is never used
+
+Assets\Editor\Stage8VRGrabbingVerifier.cs(109,16): warning CS0618: 'XRBaseInteractable.IsSelectableBy(XRBaseInteractor)' is obsolete: 'IsSelectableBy(XRBaseInteractor) has been deprecated. Use IsSelectableBy(IXRSelectInteractor) instead.'
+
+Assets\Editor\Stage8VRGrabbingVerifier.cs(113,17): warning CS0618: 'XRBaseInteractable.IsSelectableBy(XRBaseInteractor)' is obsolete: 'IsSelectableBy(XRBaseInteractor) has been deprecated. Use IsSelectableBy(IXRSelectInteractor) instead.'
+
+Assets\Editor\Stage8VRGrabbingVerifier.cs(117,16): warning CS0618: 'XRBaseInteractable.IsSelectableBy(XRBaseInteractor)' is obsolete: 'IsSelectableBy(XRBaseInteractor) has been deprecated. Use IsSelectableBy(IXRSelectInteractor) instead.'
+
+Assets\Editor\VRSceneBuilder.cs(617,14): warning CS0219: The variable 'hasVR' is assigned but its value is never used
+[358/530    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.pdb
+[359/530    0s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.MockRuntime.dll (+2 others)
+[362/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.dll.mvfrm
+[363/530    0s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.CollabProxy.Editor.dll (+2 others)
+[364/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.Play.Publisher.Editor.dll.mvfrm
+[367/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.Timeline.dll.mvfrm
+[368/530    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Unity.InputSystem.TestFramework.dll (+2 others)
+[369/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.RuntimeDebugger.Editor.dll.mvfrm
+[372/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/UnityEngine.XR.LegacyInputHelpers.dll.mvfrm
+[373/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.Settings.Editor.dll.mvfrm
+[374/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.PlasticSCM.Editor.dll.mvfrm
+[375/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.Samples.DeviceSimulator.dll.mvfrm
+[376/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.ConformanceAutomation.dll.mvfrm
+[377/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.MetaQuestSupport.dll.mvfrm
+[378/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.Timeline.Editor.dll.mvfrm
+[379/530    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+[380/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/UnityEditor.SpatialTracking.dll.mvfrm
+[381/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.Samples.StarterAssets.dll.mvfrm
+[382/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.Rider.Editor.dll.mvfrm
+[383/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Management.Editor.dll.mvfrm
+[384/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.Editor.dll.mvfrm
+[385/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.TextMeshPro.dll.mvfrm
+[386/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/UnityEngine.TestRunner.dll.mvfrm
+[387/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.XR.CoreUtils.dll.mvfrm
+[388/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.dll.mvfrm
+[389/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.OculusQuestSupport.dll.mvfrm
+[390/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.RuntimeDebugger.dll.mvfrm
+[391/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.dll.mvfrm
+[392/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.TextMeshPro.Editor.dll.mvfrm
+[393/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/UnityEditor.XR.LegacyInputHelpers.dll.mvfrm
+[394/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.VisualStudio.Editor.dll.mvfrm
+[395/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.Samples.StarterAssets.Editor.dll.mvfrm
+[396/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll.mvfrm
+[397/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/UnityEditor.TestRunner.dll.mvfrm
+[398/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/UniTask.dll.mvfrm
+[399/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.MockRuntime.dll.mvfrm
+[400/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Management.dll.mvfrm
+[401/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.Mathematics.dll.mvfrm
+[402/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Editor.dll.mvfrm
+[403/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.EditorCoroutines.Editor.dll.mvfrm
+[404/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/LeanLocalization.dll.mvfrm
+[405/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.InputSystem.TestFramework.dll.mvfrm
+[406/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll.mvfrm
+[407/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.dll.mvfrm
+[408/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.2D.Sprite.Editor.dll.mvfrm
+[409/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.InputSystem.dll.mvfrm
+[410/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.InternalAPIEditorBridgeDev.001.dll.mvfrm
+[411/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.XR.CoreUtils.Editor.dll.mvfrm
+[412/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.OculusQuestSupport.Editor.dll.mvfrm
+[413/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.XR.Interaction.Toolkit.dll.mvfrm
+[414/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.InputSystem.ForUI.dll.mvfrm
+[415/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/LeanLocalizationEditor.dll.mvfrm
+[416/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/UniTask.TextMeshPro.dll.mvfrm
+[417/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/UniTask.Linq.dll.mvfrm
+[418/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/UniTask.Editor.dll.mvfrm
+[419/530    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp.dll
+[420/530    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp.pdb
+[523/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/UniTask.DOTween.dll.mvfrm
+[524/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/UniTask.Addressables.dll.mvfrm
+[525/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/LeanCommon.dll.mvfrm
+[526/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.Mathematics.Editor.dll.mvfrm
+[527/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.CollabProxy.Editor.dll.mvfrm
+[528/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/Unity.XR.OpenXR.Features.MetaQuestSupport.Editor.dll.mvfrm
+[529/530    0s] MovedFromExtractorCombine Library/Bee/artifacts/1900b0aE.dag/UnityEngine.SpatialTracking.dll.mvfrm
+*** Tundra build success (31.48 seconds), 362 items updated, 530 evaluated
+Assets\Scripts\VR\SortingChallenge\TableSurfaceGrabTransformer.cs(30,22): warning CS0108: 'TableSurfaceGrabTransformer.Awake()' hides inherited member 'XRGeneralGrabTransformer.Awake()'. Use the new keyword if hiding was intended.
+Assets\Editor\Stage6BuildAndIntegrationVerifier.cs(95,18): warning CS0219: The variable 'mainSceneConfigured' is assigned but its value is never used
+Assets\Editor\Stage6BuildAndIntegrationVerifier.cs(96,18): warning CS0219: The variable 'collisionLabConfigured' is assigned but its value is never used
+Assets\Editor\Stage8VRGrabbingVerifier.cs(109,16): warning CS0618: 'XRBaseInteractable.IsSelectableBy(XRBaseInteractor)' is obsolete: 'IsSelectableBy(XRBaseInteractor) has been deprecated. Use IsSelectableBy(IXRSelectInteractor) instead.'
+Assets\Editor\Stage8VRGrabbingVerifier.cs(113,17): warning CS0618: 'XRBaseInteractable.IsSelectableBy(XRBaseInteractor)' is obsolete: 'IsSelectableBy(XRBaseInteractor) has been deprecated. Use IsSelectableBy(IXRSelectInteractor) instead.'
+Assets\Editor\Stage8VRGrabbingVerifier.cs(117,16): warning CS0618: 'XRBaseInteractable.IsSelectableBy(XRBaseInteractor)' is obsolete: 'IsSelectableBy(XRBaseInteractor) has been deprecated. Use IsSelectableBy(IXRSelectInteractor) instead.'
+Assets\Editor\VRSceneBuilder.cs(617,14): warning CS0219: The variable 'hasVR' is assigned but its value is never used
+AssetDatabase: script compilation time: 33.007277s
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 55.59 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.666 seconds
+Domain Reload Profiling:
+	ReloadAssembly (3667ms)
+		BeginReloadAssembly (248ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (11ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (34ms)
+		EndReloadAssembly (3259ms)
+			LoadAssemblies (1125ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (513ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (88ms)
+			SetupLoadedEditorAssemblies (1496ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (6ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (56ms)
+				BeforeProcessingInitializeOnLoad (117ms)
+				ProcessInitializeOnLoadAttributes (1231ms)
+				ProcessInitializeOnLoadMethodAttributes (76ms)
+				AfterProcessingInitializeOnLoad (11ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (11ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.011647 seconds.
+Refreshing native plugins compatible for Editor in 1.45 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh: Total: 39.161 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	Summary:
+		Imports: total=3 (actual=3, local cache=0, cache server=0)
+		Asset DB Process Time: managed=3 ms, native=656 ms
+		Asset DB Callback time: managed=257 ms, native=9 ms
+		Scripting: domain reloads=1, domain reload time=3874 ms, compile time=33010 ms, other=1348 ms
+		Project Asset Count: scripts=3927, non-scripts=1121
+		Asset File Changes: new=1, changed=3, moved=0, deleted=0
+		Scan Filter Count: 1
+	InvokeBeforeRefreshCallbacks: 0.816ms
+	ApplyChangesToAssetFolders: 0.090ms
+	Scan: 337.051ms
+	OnSourceAssetsModified: 1.326ms
+	InitializeImportedAssetsSnapshot: 10.690ms
+	GetAllGuidsForCategorization: 1.127ms
+	CategorizeAssets: 122.858ms
+	ImportOutOfDateAssets: 38378.389ms (5255.771ms without children)
+		ImportManagerImport: 109.978ms (3.214ms without children)
+			ImportInProcess: 106.645ms
+			UpdateCategorizedAssets: 0.118ms
+		CompileScripts: 33009.804ms
+		ReloadImportedAssets: 0.003ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.471ms
+		InitializingProgressBar: 0.005ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.947ms
+		OnDemandSchedulerStart: 0.411ms
+	ReloadSourceAssets: 0.985ms
+	UnloadImportedAssets: 29.230ms
+	PostProcessAllAssets: 261.092ms
+	Hotreload: 3.714ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.000ms
+	UnloadStreamsBegin: 0.962ms
+	LoadedImportedAssetsSnapshotReleaseGCHandles: 1.839ms
+	GetLoadedSourceAssetsIDs: 0.156ms
+	GetLoadedSourceAssetsSnapshot: 1.008ms
+	PersistCurrentRevisions: 0.416ms
+	UnloadStreamsEnd: 0.062ms
+	GenerateScriptTypeHashes: 7.609ms
+	Untracked: 270.134ms
+Application.AssetDatabase Initial Refresh End
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
+Scanning for USB devices : 2.584ms
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-SortingAlgorithmVisualization
+ProgressiveSceneManager::Cancel()
+Unloading 216 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 285 unused Assets / (470.2 KB). Loaded Objects now: 3592.
+Memory consumption went from 144.9 MB to 144.5 MB.
+Total: 5.761100 ms (FindLiveObjects: 0.331100 ms CreateObjectMapping: 0.270300 ms MarkObjects: 4.729000 ms  DeleteObjects: 0.429600 ms)
+
+Opening scene 'Assets/Scenes/VRSortingChallenge.unity'
+Unloading 16 Unused Serialized files (Serialized files now loaded: 0)
+[Licensing::Client] Successfully resolved entitlement details
+Loaded scene 'Assets/Scenes/VRSortingChallenge.unity'
+	Deserialize:            97.722 ms
+	Integration:            175.444 ms
+	Integration of assets:  6.923 ms
+	Thread Wait Time:       0.084 ms
+	Total Operation Time:   280.173 ms
+Unloading 7 unused Assets / (0 B). Loaded Objects now: 5225.
+Memory consumption went from 145.4 MB to 145.4 MB.
+Total: 5.877700 ms (FindLiveObjects: 0.477000 ms CreateObjectMapping: 0.312000 ms MarkObjects: 5.060700 ms  DeleteObjects: 0.026800 ms)
+
+================ TRACE GRAB PIPELINE DIAGNOSTIC ================
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:14)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 14)
+
+1. XRInteractionManager: XR Interaction Manager
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:18)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 18)
+
+2. Found 4 XRRayInteractors:
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:22)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 22)
+
+   RayInteractor: 'Ray Interactor', GameObject: 'Ray Interactor', LayerMask: -2147483615, InteractionLayers: 1, SelectAction: none, EnableUI: True
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:27)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 27)
+
+   RayInteractor: 'Teleport Interactor', GameObject: 'Teleport Interactor', LayerMask: -2147483615, InteractionLayers: -2147483648, SelectAction: Teleport Select, EnableUI: False
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:27)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 27)
+
+   RayInteractor: 'Ray Interactor', GameObject: 'Ray Interactor', LayerMask: -2147483615, InteractionLayers: 1, SelectAction: none, EnableUI: True
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:27)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 27)
+
+   RayInteractor: 'Teleport Interactor', GameObject: 'Teleport Interactor', LayerMask: -2147483615, InteractionLayers: -2147483648, SelectAction: Teleport Select, EnableUI: False
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:27)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 27)
+
+3. Found 2 XRDirectInteractors:
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:31)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 31)
+
+   DirectInteractor: 'Direct Interactor', InteractionLayers: 1
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:34)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 34)
+
+   DirectInteractor: 'Direct Interactor', InteractionLayers: 1
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:34)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 34)
+
+4. XRDeviceSimulator: XR Device Simulator
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:39)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 39)
+
+5. Found 5 SortingChallengeCubes:
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:43)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 43)
+
+   Cube 'SortCube_5' (Val=5): GrabInteractable=True, GeneralTransformer=False, TableTransformer=False, Layer=0, InteractionLayers=1, MovementType=Kinematic
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:49)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 49)
+
+     startingSingleGrabTransformers count: 0, addDefaultGrabTransformers: True
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:52)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 52)
+
+   Cube 'SortCube_3' (Val=3): GrabInteractable=True, GeneralTransformer=False, TableTransformer=False, Layer=0, InteractionLayers=1, MovementType=Kinematic
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:49)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 49)
+
+     startingSingleGrabTransformers count: 0, addDefaultGrabTransformers: True
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:52)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 52)
+
+   Cube 'SortCube_1' (Val=1): GrabInteractable=True, GeneralTransformer=False, TableTransformer=False, Layer=0, InteractionLayers=1, MovementType=Kinematic
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:49)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 49)
+
+     startingSingleGrabTransformers count: 0, addDefaultGrabTransformers: True
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:52)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 52)
+
+   Cube 'SortCube_4' (Val=4): GrabInteractable=True, GeneralTransformer=False, TableTransformer=False, Layer=0, InteractionLayers=1, MovementType=Kinematic
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:49)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 49)
+
+     startingSingleGrabTransformers count: 0, addDefaultGrabTransformers: True
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:52)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 52)
+
+   Cube 'SortCube_2' (Val=2): GrabInteractable=True, GeneralTransformer=False, TableTransformer=False, Layer=0, InteractionLayers=1, MovementType=Kinematic
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:49)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 49)
+
+     startingSingleGrabTransformers count: 0, addDefaultGrabTransformers: True
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:52)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 52)
+
+================================================================
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraceGrabPipelineDiagnostic:RunDiagnostic () (at Assets/Editor/TraceGrabPipelineDiagnostic.cs:60)
+
+(Filename: Assets/Editor/TraceGrabPipelineDiagnostic.cs Line: 60)
+
+Batchmode quit successfully invoked - shutting down!
+[Licensing::IpcConnector] License Notification channel disconnected successfully.
+[Licensing::IpcConnector] License Client channel disconnected successfully.
+AcceleratorClientConnectionCallback - disconnected - :0
+Cleanup mono
+debugger-agent: Unable to listen on 4936
+[Performance] WinEditorMain                                                                                                                                :        1 samples, Peak.   901 ms (1.0x), Avg.   901 ms, Total. 900.8 ms (2.0%)
+[Performance] WinEditorMain.ConfigureCrashHandler                                                                                                          :        1 samples, Peak.  33.7 us (1.0x), Avg.  33.7 us, Total. 33.70 us (0.0%)
+[Performance] WinEditorMain.CurlRequestInitialize                                                                                                          :        1 samples, Peak.   547 us (1.0x), Avg.   547 us, Total. 547.0 us (0.0%)
+[Performance] WinEditorMain.SetupLogFile                                                                                                                   :        1 samples, Peak.   486 us (1.0x), Avg.   486 us, Total. 485.9 us (0.0%)
+[Performance] WinEditorMain.RunNativeTestsIfRequiredAndExit                                                                                                :        1 samples, Peak.   200 ns (1.0x), Avg.   200 ns, Total. 200.0 ns (0.0%)
+[Performance] WinEditorMain.Licensing                                                                                                                      :        1 samples, Peak.   884 ms (1.0x), Avg.   884 ms, Total. 884.3 ms (2.0%)
+[Performance] WinEditorMain.InitializeCrashHandler                                                                                                         :        1 samples, Peak.  12.5 ms (1.0x), Avg.  12.5 ms, Total. 12.52 ms (0.0%)
+[Performance] WinEditorMain.CreateApplication                                                                                                              :        1 samples, Peak.   254 us (1.0x), Avg.   254 us, Total. 253.8 us (0.0%)
+[Performance] Application.InitializeProject                                                                                                                :        1 samples, Peak.  42.7 s (1.0x), Avg.  42.7 s, Total. 42.65 s (95.6%)
+[Performance] Application.PackageManager.StartServer                                                                                                       :        1 samples, Peak.  6.06 ms (1.0x), Avg.  6.06 ms, Total. 6.065 ms (0.0%)
+[Performance] Application.AcquireProjectLock                                                                                                               :        1 samples, Peak.  7.33 ms (1.0x), Avg.  7.33 ms, Total. 7.327 ms (0.0%)
+[Performance] Application.InitializeEngineNoGraphics                                                                                                       :        1 samples, Peak.  59.8 ms (1.0x), Avg.  59.8 ms, Total. 59.76 ms (0.1%)
+[Performance] Application.PackageManager.Initialize                                                                                                        :        1 samples, Peak.   979 ms (1.0x), Avg.   979 ms, Total. 978.7 ms (2.2%)
+[Performance] CurlRequestCheck                                                                                                                             :       17 samples, Peak.  49.6 us (7.4x), Avg.  6.70 us, Total. 113.9 us (0.0%)
+[Performance] Application.EngineGraphics.Initialize                                                                                                        :        1 samples, Peak.   201 ms (1.0x), Avg.   201 ms, Total. 200.9 ms (0.5%)
+[Performance] Application.GI.Initialize                                                                                                                    :        1 samples, Peak.  2.74 ms (1.0x), Avg.  2.74 ms, Total. 2.736 ms (0.0%)
+[Performance] Application.LoadAllDefaultResourcesFromEditor                                                                                                :        1 samples, Peak.  5.66 ms (1.0x), Avg.  5.66 ms, Total. 5.664 ms (0.0%)
+[Performance] Application.LoadMonoAssemblies                                                                                                               :        1 samples, Peak.   978 ms (1.0x), Avg.   978 ms, Total. 977.5 ms (2.2%)
+[Performance] RestoreManagedReferences                                                                                                                     :        2 samples, Peak.  67.6 ms (2.0x), Avg.  33.8 ms, Total. 67.62 ms (0.2%)
+[Performance] InitializeOnLoad LayerSettingsWindow                                                                                                         :        2 samples, Peak.   559 us (1.3x), Avg.   436 us, Total. 871.9 us (0.0%)
+[Performance] InitializeOnLoad ParameterControllerEditor                                                                                                   :        2 samples, Peak.  34.8 us (1.3x), Avg.  27.4 us, Total. 54.80 us (0.0%)
+[Performance] InitializeOnLoad ServicesRepository                                                                                                          :        2 samples, Peak.  1.72 ms (1.4x), Avg.  1.26 ms, Total. 2.526 ms (0.0%)
+[Performance] InitializeOnLoad AdsService                                                                                                                  :        2 samples, Peak.  8.00 ms (1.8x), Avg.  4.41 ms, Total. 8.820 ms (0.0%)
+[Performance] InitializeOnLoad AnalyticsService                                                                                                            :        2 samples, Peak.   251 us (1.2x), Avg.   210 us, Total. 420.5 us (0.0%)
+[Performance] InitializeOnLoad BuildService                                                                                                                :        2 samples, Peak.   235 us (1.1x), Avg.   207 us, Total. 413.8 us (0.0%)
+[Performance] InitializeOnLoad CloudBuildPoller                                                                                                            :        2 samples, Peak.   186 us (1.2x), Avg.   156 us, Total. 311.7 us (0.0%)
+[Performance] InitializeOnLoad CrashService                                                                                                                :        2 samples, Peak.   236 us (1.1x), Avg.   209 us, Total. 418.8 us (0.0%)
+[Performance] InitializeOnLoad PurchasingService                                                                                                           :        2 samples, Peak.  10.5 ms (1.6x), Avg.  6.51 ms, Total. 13.03 ms (0.0%)
+[Performance] InitializeOnLoad UDPService                                                                                                                  :        2 samples, Peak.   300 us (1.2x), Avg.   244 us, Total. 487.0 us (0.0%)
+[Performance] InitializeOnLoad UIDocumentHierarchyWatcher                                                                                                  :        2 samples, Peak.  1.17 ms (1.7x), Avg.   702 us, Total. 1.404 ms (0.0%)
+[Performance] InitializeOnLoad RetainedMode                                                                                                                :        2 samples, Peak.  3.27 ms (1.2x), Avg.  2.74 ms, Total. 5.485 ms (0.0%)
+[Performance] InitializeOnLoad EditorMonitor                                                                                                               :        2 samples, Peak.   262 us (1.1x), Avg.   238 us, Total. 475.7 us (0.0%)
+[Performance] InitializeOnLoad EditorShaderLoader                                                                                                          :        2 samples, Peak.  1.39 ms (1.1x), Avg.  1.22 ms, Total. 2.431 ms (0.0%)
+[Performance] InitializeOnLoad UXMLEditorFactories                                                                                                         :        2 samples, Peak.  89.5 ms (1.1x), Avg.  83.4 ms, Total. 166.8 ms (0.4%)
+[Performance] InitializeOnLoad SearchMonitor                                                                                                               :        2 samples, Peak.  43.5 ms (1.6x), Avg.  27.4 ms, Total. 54.76 ms (0.1%)
+[Performance] InitializeOnLoad CustomIndexers                                                                                                              :        2 samples, Peak.  28.8 ms (1.2x), Avg.  24.6 ms, Total. 49.14 ms (0.1%)
+[Performance] InitializeOnLoad PlayModeDownload                                                                                                            :        2 samples, Peak.  4.63 ms (1.9x), Avg.  2.42 ms, Total. 4.835 ms (0.0%)
+[Performance] InitializeOnLoad SearchWindow                                                                                                                :        2 samples, Peak.   204 us (1.0x), Avg.   196 us, Total. 391.9 us (0.0%)
+[Performance] InitializeOnLoad EditMode                                                                                                                    :        2 samples, Peak.   730 us (1.2x), Avg.   590 us, Total. 1.180 ms (0.0%)
+[Performance] InitializeOnLoad AssetStoreContext                                                                                                           :        2 samples, Peak.  8.31 ms (1.3x), Avg.  6.29 ms, Total. 12.57 ms (0.0%)
+[Performance] InitializeOnLoad DrivenRectTransformUndo                                                                                                     :        2 samples, Peak.   403 us (1.1x), Avg.   369 us, Total. 737.7 us (0.0%)
+[Performance] InitializeOnLoad CacheServerWindow                                                                                                           :        2 samples, Peak.  16.2 us (1.0x), Avg.  15.6 us, Total. 31.30 us (0.0%)
+[Performance] InitializeOnLoad ManagedDebuggerWindow                                                                                                       :        2 samples, Peak.  1.32 ms (1.0x), Avg.  1.30 ms, Total. 2.593 ms (0.0%)
+[Performance] InitializeOnLoad WindowLayout                                                                                                                :        2 samples, Peak.  7.00 ms (1.9x), Avg.  3.76 ms, Total. 7.523 ms (0.0%)
+[Performance] InitializeOnLoad PrefabInstanceChangedListener                                                                                               :        2 samples, Peak.   276 us (1.5x), Avg.   180 us, Total. 360.4 us (0.0%)
+[Performance] InitializeOnLoad SettingsService                                                                                                             :        2 samples, Peak.  11.7 us (1.1x), Avg.  11.1 us, Total. 22.10 us (0.0%)
+[Performance] InitializeOnLoad NativeFormatImporterUtility                                                                                                 :        2 samples, Peak.  3.50 ms (1.1x), Avg.  3.19 ms, Total. 6.376 ms (0.0%)
+[Performance] InitializeOnLoad UISystemProfilerRenderService                                                                                               :        2 samples, Peak.  14.1 us (1.1x), Avg.  12.7 us, Total. 25.30 us (0.0%)
+[Performance] InitializeOnLoad ShortcutIntegration                                                                                                         :        2 samples, Peak.   115 us (1.1x), Avg.   108 us, Total. 215.2 us (0.0%)
+[Performance] InitializeOnLoad UnityConnect                                                                                                                :        2 samples, Peak.  94.2 us (1.0x), Avg.  93.9 us, Total. 187.8 us (0.0%)
+[Performance] InitializeOnLoad ObjectSelectorSearch                                                                                                        :        2 samples, Peak.   557 us (1.8x), Avg.   313 us, Total. 627.0 us (0.0%)
+[Performance] InitializeOnLoad ProjectSearch                                                                                                               :        2 samples, Peak.  78.0 us (1.0x), Avg.  74.4 us, Total. 148.8 us (0.0%)
+[Performance] InitializeOnLoad SceneSearch                                                                                                                 :        2 samples, Peak.  69.2 us (1.1x), Avg.  65.0 us, Total. 130.0 us (0.0%)
+[Performance] InitializeOnLoad SearchService                                                                                                               :        2 samples, Peak.   211 us (1.1x), Avg.   190 us, Total. 379.9 us (0.0%)
+[Performance] InitializeOnLoad AddComponentWindow                                                                                                          :        2 samples, Peak.   177 us (1.0x), Avg.   177 us, Total. 354.0 us (0.0%)
+[Performance] InitializeOnLoad CloudBuild                                                                                                                  :        2 samples, Peak.  5.00 us (1.1x), Avg.  4.40 us, Total. 8.800 us (0.0%)
+[Performance] InitializeOnLoad MixerEffectDefinitionReloader                                                                                               :        2 samples, Peak.  3.62 ms (1.1x), Avg.  3.24 ms, Total. 6.483 ms (0.0%)
+[Performance] InitializeOnLoad MenuItems                                                                                                                   :        2 samples, Peak.   259 us (1.2x), Avg.   210 us, Total. 420.3 us (0.0%)
+[Performance] InitializeOnLoad ManagedDebugger                                                                                                             :        2 samples, Peak.  1.80 us (1.1x), Avg.  1.60 us, Total. 3.200 us (0.0%)
+[Performance] InitializeOnLoad EditorDragAndDrop.RegisterEditorClient                                                                                      :        2 samples, Peak.  1.78 ms (1.6x), Avg.  1.10 ms, Total. 2.195 ms (0.0%)
+[Performance] InitializeOnLoad EditorDelegateRegistration.Initialize                                                                                       :        2 samples, Peak.   819 us (1.1x), Avg.   748 us, Total. 1.497 ms (0.0%)
+[Performance] InitializeOnLoad LiveReloadTrackerCreator.Initialize                                                                                         :        2 samples, Peak.   356 us (1.1x), Avg.   324 us, Total. 647.2 us (0.0%)
+[Performance] InitializeOnLoad PackageManagerHookGUIDConverter.RegisterPackagesEventHandler                                                                :        2 samples, Peak.   214 us (1.4x), Avg.   153 us, Total. 305.9 us (0.0%)
+[Performance] InitializeOnLoad RuntimeEditorDelegateRegistration.Initialize                                                                                :        2 samples, Peak.   384 us (1.1x), Avg.   338 us, Total. 677.0 us (0.0%)
+[Performance] InitializeOnLoad EditorEventCallbacks.InitializeFontAssetResourceChangeCallBacks                                                             :        2 samples, Peak.  2.32 ms (1.0x), Avg.  2.21 ms, Total. 4.426 ms (0.0%)
+[Performance] InitializeOnLoad SceneTemplateService.Init                                                                                                   :        2 samples, Peak.   889 us (1.3x), Avg.   685 us, Total. 1.369 ms (0.0%)
+[Performance] InitializeOnLoad PackageManagerWindow.EditorInitializedInSafeMode                                                                            :        2 samples, Peak.  47.8 ms (2.0x), Avg.  24.0 ms, Total. 48.06 ms (0.1%)
+[Performance] InitializeOnLoad EntitlementsErrorChecker.OpenFirstEntitlementError                                                                          :        2 samples, Peak.  13.0 ms (1.9x), Avg.  6.84 ms, Total. 13.68 ms (0.0%)
+[Performance] InitializeOnLoad ScopedRegistryAddedPopup.SubscribeToRegistriesAdded                                                                         :        2 samples, Peak.   208 us (1.2x), Avg.   180 us, Total. 359.9 us (0.0%)
+[Performance] InitializeOnLoad DiagnosticSwitchesConsoleMessage.Init                                                                                       :        2 samples, Peak.  8.86 ms (1.9x), Avg.  4.76 ms, Total. 9.519 ms (0.0%)
+[Performance] InitializeOnLoad SysrootManager.Initialize                                                                                                   :        2 samples, Peak.   751 us (1.0x), Avg.   749 us, Total. 1.499 ms (0.0%)
+[Performance] InitializeOnLoad AssetPostprocessingInternal.RefreshCustomDependencies                                                                       :        2 samples, Peak.  1.92 ms (1.0x), Avg.  1.84 ms, Total. 3.689 ms (0.0%)
+[Performance] InitializeOnLoad EditorWindow.Initialize                                                                                                     :        2 samples, Peak.   348 us (1.0x), Avg.   332 us, Total. 664.9 us (0.0%)
+[Performance] InitializeOnLoad SceneVisibilityManager.Initialize                                                                                           :        2 samples, Peak.  9.99 ms (1.7x), Avg.  5.75 ms, Total. 11.51 ms (0.0%)
+[Performance] InitializeOnLoad MemoryProfilerCompilationGuard.InjectCompileGuard                                                                           :        2 samples, Peak.   324 us (1.1x), Avg.   292 us, Total. 584.9 us (0.0%)
+[Performance] ProcessService.EditorAfterLoadAllAssemblies                                                                                                  :        2 samples, Peak.   592 us (1.2x), Avg.   506 us, Total. 1.013 ms (0.0%)
+[Performance] Application.ReadLicenseInfo                                                                                                                  :        1 samples, Peak.  15.0 ms (1.0x), Avg.  15.0 ms, Total. 15.03 ms (0.0%)
+[Performance] Application.InitialRefresh                                                                                                                   :        1 samples, Peak.  39.2 s (1.0x), Avg.  39.2 s, Total. 39.17 s (87.8%)
+[Performance] BuilderAssetModificationProcessor.OnWillCreateAsset                                                                                          :        1 samples, Peak.  2.15 ms (1.0x), Avg.  2.15 ms, Total. 2.147 ms (0.0%)
+[Performance] ShaderImporter.SourceAssetModified                                                                                                           :        2 samples, Peak.  1.50 us (1.4x), Avg.  1.10 us, Total. 2.200 us (0.0%)
+[Performance] ShaderIncludeImporter.SourceAssetModified                                                                                                    :        2 samples, Peak.  1.10 us (1.1x), Avg.  1000 ns, Total. 2.000 us (0.0%)
+[Performance] PresetManagerPostProcessor.OnPreprocessAsset                                                                                                 :        3 samples, Peak.   528 us (1.8x), Avg.   299 us, Total. 898.0 us (0.0%)
+[Performance] CancelSplashScreenOnAssetChange.OnPreprocessAsset                                                                                            :        3 samples, Peak.   296 us (2.9x), Avg.   103 us, Total. 307.7 us (0.0%)
+[Performance] BuilderAssetModificationProcessor.OnWillSaveAssets                                                                                           :        2 samples, Peak.   951 us (1.3x), Avg.   742 us, Total. 1.485 ms (0.0%)
+[Performance] TerrainModificationProcessor.OnWillSaveAssets                                                                                                :        2 samples, Peak.  1.32 ms (1.2x), Avg.  1.12 ms, Total. 2.232 ms (0.0%)
+[Performance] VersionControl.Task.Wait                                                                                                                     :        1 samples, Peak.  22.1 us (1.0x), Avg.  22.1 us, Total. 22.10 us (0.0%)
+[Performance] Compiling Scripts                                                                                                                            :        1 samples, Peak.  33.0 s (1.0x), Avg.  33.0 s, Total. 33.01 s (74.0%)
+[Performance] InitializeOnLoad InteractionLayerUpdater                                                                                                     :        1 samples, Peak.  5.90 us (1.0x), Avg.  5.90 us, Total. 5.900 us (0.0%)
+[Performance] InitializeOnLoad ToolbarBootstrap                                                                                                            :        1 samples, Peak.   969 ms (1.0x), Avg.   969 ms, Total. 969.4 ms (2.2%)
+[Performance] Package.AsyncRequest                                                                                                                         :        3 samples, Peak.  1.54 ms (3.0x), Avg.   516 us, Total. 1.548 ms (0.0%)
+[Performance] InitializeOnLoad BuildValidator                                                                                                              :        1 samples, Peak.  1.36 ms (1.0x), Avg.  1.36 ms, Total. 1.365 ms (0.0%)
+[Performance] InitializeOnLoad ScriptableSettingsInitializer                                                                                               :        1 samples, Peak.  1.44 ms (1.0x), Avg.  1.44 ms, Total. 1.435 ms (0.0%)
+[Performance] InitializeOnLoad BuildHelperUtils                                                                                                            :        1 samples, Peak.  17.7 us (1.0x), Avg.  17.7 us, Total. 17.70 us (0.0%)
+[Performance] InitializeOnLoad PlasticPlugin                                                                                                               :        1 samples, Peak.   900 ns (1.0x), Avg.   900 ns, Total. 900.0 ns (0.0%)
+[Performance] InitializeOnLoad RiderScriptEditor                                                                                                           :        1 samples, Peak.  12.6 ms (1.0x), Avg.  12.6 ms, Total. 12.64 ms (0.0%)
+[Performance] InitializeOnLoad CallbackInitializer                                                                                                         :        1 samples, Peak.  2.56 ms (1.0x), Avg.  2.56 ms, Total. 2.556 ms (0.0%)
+[Performance] InitializeOnLoad InputSystem                                                                                                                 :        1 samples, Peak.  78.7 ms (1.0x), Avg.  78.7 ms, Total. 78.66 ms (0.2%)
+[Performance] InitializeOnLoad TouchSimulation                                                                                                             :        1 samples, Peak.   189 us (1.0x), Avg.   189 us, Total. 188.9 us (0.0%)
+[Performance] InitializeOnLoad PrefabLayoutRebuilder                                                                                                       :        1 samples, Peak.   352 us (1.0x), Avg.   352 us, Total. 352.2 us (0.0%)
+[Performance] InitializeOnLoad SpriteEditorWindow                                                                                                          :        1 samples, Peak.   499 us (1.0x), Avg.   499 us, Total. 499.2 us (0.0%)
+[Performance] InitializeOnLoad RerunCallbackInitializer                                                                                                    :        1 samples, Peak.  2.31 ms (1.0x), Avg.  2.31 ms, Total. 2.307 ms (0.0%)
+[Performance] InitializeOnLoad UnityTestProtocolStarter                                                                                                    :        1 samples, Peak.   392 us (1.0x), Avg.   392 us, Total. 391.6 us (0.0%)
+[Performance] InitializeOnLoad TestStarter                                                                                                                 :        1 samples, Peak.   755 us (1.0x), Avg.   755 us, Total. 755.1 us (0.0%)
+[Performance] InitializeOnLoad BackgroundWatcher                                                                                                           :        1 samples, Peak.  87.2 us (1.0x), Avg.  87.2 us, Total. 87.20 us (0.0%)
+[Performance] InitializeOnLoad SimulatedInputLayoutLoader                                                                                                  :        1 samples, Peak.   369 us (1.0x), Avg.   369 us, Total. 368.7 us (0.0%)
+[Performance] InitializeOnLoad SectorInteraction                                                                                                           :        1 samples, Peak.   280 us (1.0x), Avg.   280 us, Total. 280.1 us (0.0%)
+[Performance] InitializeOnLoad Vector3FallbackComposite                                                                                                    :        1 samples, Peak.   281 us (1.0x), Avg.   281 us, Total. 280.6 us (0.0%)
+[Performance] InitializeOnLoad QuaternionFallbackComposite                                                                                                 :        1 samples, Peak.  90.7 us (1.0x), Avg.  90.7 us, Total. 90.70 us (0.0%)
+[Performance] InitializeOnLoad IntegerFallbackComposite                                                                                                    :        1 samples, Peak.  85.1 us (1.0x), Avg.  85.1 us, Total. 85.10 us (0.0%)
+[Performance] InitializeOnLoad ButtonFallbackComposite                                                                                                     :        1 samples, Peak.  85.0 us (1.0x), Avg.  85.0 us, Total. 85.00 us (0.0%)
+[Performance] InitializeOnLoad XRGeneralSettingsPerBuildTarget                                                                                             :        1 samples, Peak.   585 us (1.0x), Avg.   585 us, Total. 584.8 us (0.0%)
+[Performance] InitializeOnLoad XRPackageInitializationBootstrap                                                                                            :        1 samples, Peak.  83.8 us (1.0x), Avg.  83.8 us, Total. 83.80 us (0.0%)
+[Performance] InitializeOnLoad XRPackageMetadataStore                                                                                                      :        1 samples, Peak.   603 us (1.0x), Avg.   603 us, Total. 603.5 us (0.0%)
+[Performance] InitializeOnLoad XRLegacyUninstaller                                                                                                         :        1 samples, Peak.  7.55 ms (1.0x), Avg.  7.55 ms, Total. 7.547 ms (0.0%)
+[Performance] InitializeOnLoad VisualStudioEditor                                                                                                          :        1 samples, Peak.  10.6 ms (1.0x), Avg.  10.6 ms, Total. 10.60 ms (0.0%)
+[Performance] InitializeOnLoad VisualStudioIntegration                                                                                                     :        1 samples, Peak.   670 us (1.0x), Avg.   670 us, Total. 670.3 us (0.0%)
+[Performance] InitializeOnLoad TestRunnerApiListener                                                                                                       :        1 samples, Peak.   181 us (1.0x), Avg.   181 us, Total. 180.8 us (0.0%)
+[Performance] InitializeOnLoad VSCodeScriptEditor                                                                                                          :        1 samples, Peak.  2.83 ms (1.0x), Avg.  2.83 ms, Total. 2.828 ms (0.0%)
+[Performance] InitializeOnLoad Stage5CollisionLabVerifier                                                                                                  :        1 samples, Peak.   289 us (1.0x), Avg.   289 us, Total. 288.9 us (0.0%)
+[Performance] InitializeOnLoad PlayModeStateChanged                                                                                                        :        1 samples, Peak.  88.0 us (1.0x), Avg.  88.0 us, Total. 88.00 us (0.0%)
+[Performance] InitializeOnLoad PlayerLoopHelper.InitOnEditor                                                                                               :        1 samples, Peak.  9.80 ms (1.0x), Avg.  9.80 ms, Total. 9.804 ms (0.0%)
+[Performance] InitializeOnLoad OpenXRInput.RegisterFeatureLayouts                                                                                          :        1 samples, Peak.  2.76 ms (1.0x), Avg.  2.76 ms, Total. 2.760 ms (0.0%)
+[Performance] InitializeOnLoad CoreUtilsAnalytics.RegisterEvents                                                                                           :        1 samples, Peak.   837 us (1.0x), Avg.   837 us, Total. 836.6 us (0.0%)
+[Performance] InitializeOnLoad OpenXRProjectValidationRulesSetup.OpenXRProjectValidationCheck                                                              :        1 samples, Peak.  24.9 ms (1.0x), Avg.  24.9 ms, Total. 24.90 ms (0.1%)
+[Performance] InitializeOnLoad OpenXRChooseRuntimeLibraries.InitializeOnLoad                                                                               :        1 samples, Peak.  2.02 ms (1.0x), Avg.  2.02 ms, Total. 2.019 ms (0.0%)
+[Performance] InitializeOnLoad OpenXRFeatureSetManager.InitializeOnLoad                                                                                    :        1 samples, Peak.   487 us (1.0x), Avg.   487 us, Total. 487.4 us (0.0%)
+[Performance] InitializeOnLoad StarterAssetsSampleProjectValidation.RegisterProjectValidationRules                                                         :        1 samples, Peak.   475 us (1.0x), Avg.   475 us, Total. 475.1 us (0.0%)
+[Performance] InitializeOnLoad Localization.ForceEnableLocalization                                                                                        :        1 samples, Peak.   715 us (1.0x), Avg.   715 us, Total. 714.7 us (0.0%)
+[Performance] InitializeOnLoad TestJobDataHolder.ResumeRunningJobs                                                                                         :        1 samples, Peak.   941 us (1.0x), Avg.   941 us, Total. 940.8 us (0.0%)
+[Performance] InitializeOnLoad AnalyticsReporter.RegisterCallbacks                                                                                         :        1 samples, Peak.   339 us (1.0x), Avg.   339 us, Total. 339.1 us (0.0%)
+[Performance] InitializeOnLoad VisualStudioEditor.LegacyVisualStudioCodePackageDisabler                                                                    :        1 samples, Peak.  6.73 ms (1.0x), Avg.  6.73 ms, Total. 6.725 ms (0.0%)
+[Performance] DidReloadScriptsPackageVersionUtility.OnReloadScripts                                                                                        :        1 samples, Peak.   131 us (1.0x), Avg.   131 us, Total. 131.1 us (0.0%)
+[Performance] DidReloadScriptsAdvancedDropdownWindow.OnScriptReload                                                                                        :        2 samples, Peak.   483 us (1.2x), Avg.   409 us, Total. 818.4 us (0.0%)
+[Performance] DidReloadScriptsTestListCache.ScriptReloaded                                                                                                 :        1 samples, Peak.  1.55 ms (1.0x), Avg.  1.55 ms, Total. 1.552 ms (0.0%)
+[Performance] DidReloadScriptsTestRunnerWindow.CompilationCallback                                                                                         :        1 samples, Peak.   307 us (1.0x), Avg.   307 us, Total. 306.9 us (0.0%)
+[Performance] AssemblyReloadEvents.afterAssemblyReload: UnityEditor.XR.Management.Metadata.XRPackageMetadataStore.AssemblyReloadEvents_afterAssemblyReload :        1 samples, Peak.  5.69 ms (1.0x), Avg.  5.69 ms, Total. 5.688 ms (0.0%)
+[Performance] AssetDatabase.ImportAssets                                                                                                                   :        3 samples, Peak.  1.20 us (1.5x), Avg.   800 ns, Total. 2.400 us (0.0%)
+[Performance] TMPro_TexturePostProcessor.OnPostprocessAllAssets                                                                                            :        2 samples, Peak.   964 us (1.2x), Avg.   836 us, Total. 1.673 ms (0.0%)
+[Performance] AssetPostprocessor.OnPostprocessAllAssets                                                                                                    :        2 samples, Peak.  1.88 ms (1.0x), Avg.  1.88 ms, Total. 3.756 ms (0.0%)
+[Performance] BuilderAssetPostprocessor.OnPostprocessAllAssets                                                                                             :        2 samples, Peak.  4.72 ms (1.0x), Avg.  4.72 ms, Total. 9.433 ms (0.0%)
+[Performance] ArtifactBrowserPostProcessor.OnPostprocessAllAssets                                                                                          :        2 samples, Peak.   571 us (1.0x), Avg.   568 us, Total. 1.135 ms (0.0%)
+[Performance] AssetEvents.OnPostprocessAllAssets                                                                                                           :        4 samples, Peak.   368 us (1.6x), Avg.   228 us, Total. 912.9 us (0.0%)
+[Performance] AudioMixerPostprocessor.OnPostprocessAllAssets                                                                                               :        2 samples, Peak.   465 us (1.0x), Avg.   463 us, Total. 925.3 us (0.0%)
+[Performance] StyleCatalogPostProcessor.OnPostprocessAllAssets                                                                                             :        2 samples, Peak.  32.7 ms (1.0x), Avg.  32.7 ms, Total. 65.44 ms (0.1%)
+[Performance] BuildCatalog                                                                                                                                 :        1 samples, Peak.  31.1 ms (1.0x), Avg.  31.1 ms, Total. 31.09 ms (0.1%)
+[Performance] ModelImporterPostProcessor.OnPostprocessAllAssets                                                                                            :        2 samples, Peak.  2.36 ms (1.0x), Avg.  2.36 ms, Total. 4.713 ms (0.0%)
+[Performance] RetainedModeAssetPostprocessor.OnPostprocessAllAssets                                                                                        :        2 samples, Peak.  2.88 ms (1.0x), Avg.  2.87 ms, Total. 5.742 ms (0.0%)
+[Performance] AssetChangedListener.OnPostprocessAllAssets                                                                                                  :        2 samples, Peak.  10.4 ms (1.0x), Avg.  10.4 ms, Total. 20.74 ms (0.0%)
+[Performance] SpeedTreePostProcessor.OnPostprocessAllAssets                                                                                                :        2 samples, Peak.   278 us (1.0x), Avg.   275 us, Total. 550.0 us (0.0%)
+[Performance] TextAssetPostProcessor.OnPostprocessAllAssets                                                                                                :        2 samples, Peak.   574 us (1.0x), Avg.   571 us, Total. 1.143 ms (0.0%)
+[Performance] SpriteEditorTexturePostprocessor.OnPostprocessAllAssets                                                                                      :        2 samples, Peak.   450 us (1.0x), Avg.   447 us, Total. 894.8 us (0.0%)
+[Performance] UIDocumentAssetPostProcessor.OnPostprocessAllAssets                                                                                          :        2 samples, Peak.  1.09 ms (1.0x), Avg.  1.09 ms, Total. 2.183 ms (0.0%)
+[Performance] AssetCallbacks.OnPostprocessAllAssets                                                                                                        :        2 samples, Peak.   147 ms (1.0x), Avg.   147 ms, Total. 293.6 ms (0.7%)
+[Performance] SyncVS.PostprocessSyncProject                                                                                                                :        1 samples, Peak.   129 us (1.0x), Avg.   129 us, Total. 129.4 us (0.0%)
+[Performance] EditorApplication.projectChanged: UnityEngine.InputSystem.LowLevel.NativeInputRuntime.OnProjectChanged                                       :        1 samples, Peak.   296 us (1.0x), Avg.   296 us, Total. 295.7 us (0.0%)
+[Performance] EditorApplication.projectChanged: UnityEditor.Audio.MixerEffectDefinitionReloader.OnProjectChanged                                           :        1 samples, Peak.   771 us (1.0x), Avg.   771 us, Total. 770.9 us (0.0%)
+[Performance] Application.ImportPackagesAndSetTemplateWhenCreatingProject                                                                                  :        1 samples, Peak.  27.5 ms (1.0x), Avg.  27.5 ms, Total. 27.45 ms (0.1%)
+[Performance] Application.SyncCurrentColorSpace                                                                                                            :        1 samples, Peak.   159 ms (1.0x), Avg.   159 ms, Total. 159.4 ms (0.4%)
+[Performance] Application.OnUsbDevicesChanged                                                                                                              :        1 samples, Peak.  2.67 ms (1.0x), Avg.  2.67 ms, Total. 2.666 ms (0.0%)
+[Performance] Application.AssetInstanceCacheUpdate                                                                                                         :        1 samples, Peak.   600 ns (1.0x), Avg.   600 ns, Total. 600.0 ns (0.0%)
+[Performance] Application.UnityExtensions.Initialize                                                                                                       :        1 samples, Peak.  2.15 ms (1.0x), Avg.  2.15 ms, Total. 2.145 ms (0.0%)
+[Performance] Application.InitializeManagedCompilationPipeline                                                                                             :        1 samples, Peak.   179 ms (1.0x), Avg.   179 ms, Total. 178.9 ms (0.4%)
+[Performance] Application.ExecuteStartups                                                                                                                  :        1 samples, Peak.   109 ms (1.0x), Avg.   109 ms, Total. 109.4 ms (0.2%)
+[Performance] Menu.RegisterMenuInterface                                                                                                                   :       26 samples, Peak.  2.80 us (8.1x), Avg.   346 ns, Total. 9.000 us (0.0%)
+[Performance] Gizmo.RebuildRenderers                                                                                                                       :        1 samples, Peak.   108 ms (1.0x), Avg.   108 ms, Total. 108.0 ms (0.2%)
+[Performance] Gizmo.AddGizmoRenderers                                                                                                                      :       81 samples, Peak.  2.78 ms (51.0x), Avg.  54.6 us, Total. 4.420 ms (0.0%)
+[Performance] Application.editorInitializingProject                                                                                                        :        1 samples, Peak.  64.7 us (1.0x), Avg.  64.7 us, Total. 64.70 us (0.0%)
+[Performance] Application.InitializeMenu                                                                                                                   :        1 samples, Peak.   123 ms (1.0x), Avg.   123 ms, Total. 122.9 ms (0.3%)
+[Performance] Menu.RebuildAll                                                                                                                              :        1 samples, Peak.   123 ms (1.0x), Avg.   123 ms, Total. 122.9 ms (0.3%)
+[Performance] Menu.BuildRegisteredMenuInterfaces                                                                                                           :        1 samples, Peak.   119 ms (1.0x), Avg.   119 ms, Total. 118.5 ms (0.3%)
+[Performance] Menu.FilterMenuItem                                                                                                                          :      747 samples, Peak.  20.9 ms (723.5x), Avg.  28.8 us, Total. 21.54 ms (0.0%)
+[Performance] UpdateAllMenus                                                                                                                               :        1 samples, Peak.   854 us (1.0x), Avg.   854 us, Total. 853.7 us (0.0%)
+[Performance] Menu.RebuildOSMainMenu                                                                                                                       :        2 samples, Peak.  3.95 ms (1.1x), Avg.  3.67 ms, Total. 7.334 ms (0.0%)
+[Performance] EditorSceneManager.sceneClosing: UnityEditor.SceneVisibilityManager.EditorSceneManagerOnSceneClosing                                         :        2 samples, Peak.   524 us (2.0x), Avg.   264 us, Total. 528.1 us (0.0%)
+[Performance] EditorSceneManager.sceneClosed: callback in UnityEditor.Search.SearchMonitor                                                                 :        2 samples, Peak.   114 us (2.0x), Avg.  57.7 us, Total. 115.4 us (0.0%)
+[Performance] EditorSceneManager.activeSceneChangedInEditMode: callback in UnityEditor.Search.SearchMonitor                                                :        2 samples, Peak.  51.6 us (1.9x), Avg.  26.5 us, Total. 53.10 us (0.0%)
+[Performance] GUIView.RepaintAll.PlayerLoopController                                                                                                      :        1 samples, Peak.  4.30 us (1.0x), Avg.  4.30 us, Total. 4.300 us (0.0%)
+[Performance] EditorSceneManager.newSceneCreated: UnityEditor.SceneVisibilityManager.EditorSceneManagerOnNewSceneCreated                                   :        1 samples, Peak.   563 us (1.0x), Avg.   563 us, Total. 562.5 us (0.0%)
+[Performance] EditorSceneManager.newSceneCreated: UnityEditor.SceneManagement.StageNavigationManager.OnNewSceneCreated                                     :        1 samples, Peak.   101 us (1.0x), Avg.   101 us, Total. 101.3 us (0.0%)
+[Performance] Application.InvokeFinishedLoadingProject                                                                                                     :        1 samples, Peak.   150 ms (1.0x), Avg.   150 ms, Total. 150.1 ms (0.3%)
+[Performance] ProcessService.OnProjectLoaded                                                                                                               :        1 samples, Peak.  67.3 us (1.0x), Avg.  67.3 us, Total. 67.30 us (0.0%)
+[Performance] EditorSceneManager.sceneOpening: UnityEditor.SceneVisibilityManager.EditorSceneManagerOnSceneOpening                                         :        1 samples, Peak.   229 us (1.0x), Avg.   229 us, Total. 229.1 us (0.0%)
+[Performance] Inspector.InitOrRebuild                                                                                                                      :        1 samples, Peak.   820 us (1.0x), Avg.   820 us, Total. 819.9 us (0.0%)
+[Performance] EditorSceneManager.sceneOpened: callback in UnityEditor.Search.SearchMonitor                                                                 :        1 samples, Peak.  46.8 us (1.0x), Avg.  46.8 us, Total. 46.80 us (0.0%)
+[Performance] EditorSceneManager.sceneOpened: UnityEditor.SceneVisibilityManager.EditorSceneManagerOnSceneOpened                                           :        1 samples, Peak.   280 us (1.0x), Avg.   280 us, Total. 280.2 us (0.0%)
+[Performance] EditorSceneManager.sceneOpened: UnityEditor.SceneManagement.StageNavigationManager.OnSceneOpened                                             :        1 samples, Peak.  81.2 us (1.0x), Avg.  81.2 us, Total. 81.20 us (0.0%)
+[Performance] EditorApplication.quitting: UnityEditor.Search.SearchMonitor.OnQuitting                                                                      :        1 samples, Peak.  2.17 ms (1.0x), Avg.  2.17 ms, Total. 2.172 ms (0.0%)
+[Performance] EditorApplication.quitting: callback in UnityEditor.TextCore.Text.EditorEventCallbacks                                                       :        1 samples, Peak.  16.6 ms (1.0x), Avg.  16.6 ms, Total. 16.62 ms (0.0%)
+[Performance] Application.Shutdown.PauseProfilerSession                                                                                                    :        1 samples, Peak.  53.1 us (1.0x), Avg.  53.1 us, Total. 53.10 us (0.0%)
+[Performance] Application.Shutdown.PauseAssetImportWorkers                                                                                                 :        1 samples, Peak.   290 us (1.0x), Avg.   290 us, Total. 289.9 us (0.0%)
+[Performance] Application.Shutdown.SaveAssets                                                                                                              :        1 samples, Peak.  13.7 ms (1.0x), Avg.  13.7 ms, Total. 13.67 ms (0.0%)
+[Performance] AssetModificationProcessor.OnWillSaveAssets                                                                                                  :        1 samples, Peak.   484 us (1.0x), Avg.   484 us, Total. 483.6 us (0.0%)
+[Performance] Application.Shutdown.CleanupRenderPipeline                                                                                                   :        1 samples, Peak.  10.6 us (1.0x), Avg.  10.6 us, Total. 10.60 us (0.0%)
+[Performance] Application.Shutdown.StopPreloadManager                                                                                                      :        1 samples, Peak.  9.78 ms (1.0x), Avg.  9.78 ms, Total. 9.783 ms (0.0%)
+[Performance] Application.Shutdown.DestroyWorld                                                                                                            :        1 samples, Peak.  8.81 ms (1.0x), Avg.  8.81 ms, Total. 8.814 ms (0.0%)
+[Performance] Application.Shutdown.CleanupAfterLoad                                                                                                        :        1 samples, Peak.  4.30 ms (1.0x), Avg.  4.30 ms, Total. 4.300 ms (0.0%)
+[Performance] Application.Shutdown.Progress                                                                                                                :        1 samples, Peak.  6.40 us (1.0x), Avg.  6.40 us, Total. 6.400 us (0.0%)
+[Performance] Application.Shutdown.GICleanupManagers                                                                                                       :        1 samples, Peak.   863 us (1.0x), Avg.   863 us, Total. 863.4 us (0.0%)
+[Performance] Application.Shutdown.MenuCleanupClass                                                                                                        :        1 samples, Peak.   339 us (1.0x), Avg.   339 us, Total. 339.0 us (0.0%)
+[Performance] Application.Shutdown.ADBSaveStateBeforeShutdown                                                                                              :        1 samples, Peak.  8.20 us (1.0x), Avg.  8.20 us, Total. 8.200 us (0.0%)
+[Performance] Application.Shutdown.RemoteShutdown                                                                                                          :        1 samples, Peak.   800 ns (1.0x), Avg.   800 ns, Total. 800.0 ns (0.0%)
+[Performance] Application.Shutdown.CleanupVCProvider                                                                                                       :        1 samples, Peak.  23.2 us (1.0x), Avg.  23.2 us, Total. 23.20 us (0.0%)
+[Performance] Application.Shutdown.InputShutdown                                                                                                           :        1 samples, Peak.  3.60 us (1.0x), Avg.  3.60 us, Total. 3.600 us (0.0%)
+[Performance] Application.Shutdown.GizmoManagerDestroy                                                                                                     :        1 samples, Peak.  1.58 ms (1.0x), Avg.  1.58 ms, Total. 1.579 ms (0.0%)
+[Performance] Application.Shutdown.ProfilerSession                                                                                                         :        1 samples, Peak.   206 us (1.0x), Avg.   206 us, Total. 206.3 us (0.0%)
+[Performance] Application.Shutdown.ReleaseGfxWindowOnAllGUIViews                                                                                           :        1 samples, Peak.   300 ns (1.0x), Avg.   300 ns, Total. 300.0 ns (0.0%)
+[Performance] Application.Shutdown.CleanupEngine                                                                                                           :        1 samples, Peak.   172 ms (1.0x), Avg.   172 ms, Total. 171.5 ms (0.4%)
+[Performance] Application.Shutdown.CleanupAssetDatabase                                                                                                    :        1 samples, Peak.  31.4 ms (1.0x), Avg.  31.4 ms, Total. 31.36 ms (0.1%)
+[Performance] Application.Shutdown.ScriptCompilationCleanUp                                                                                                :        1 samples, Peak.  54.4 us (1.0x), Avg.  54.4 us, Total. 54.40 us (0.0%)
+[Performance] Application.Shutdown.DestroyJobSystem                                                                                                        :        1 samples, Peak.   124 us (1.0x), Avg.   124 us, Total. 124.0 us (0.0%)
+[Performance] Application.Shutdown.CleanupPersistentManager                                                                                                :        1 samples, Peak.  4.45 ms (1.0x), Avg.  4.45 ms, Total. 4.455 ms (0.0%)
+[Performance] Application.Shutdown.CleanupAsyncReadManager                                                                                                 :        1 samples, Peak.  1.69 ms (1.0x), Avg.  1.69 ms, Total. 1.694 ms (0.0%)
+[Performance] Application.Shutdown.CleanupProgressBar                                                                                                      :        1 samples, Peak.  10.1 us (1.0x), Avg.  10.1 us, Total. 10.10 us (0.0%)
+[Performance] Application.Shutdown.CleanupMono                                                                                                             :        1 samples, Peak.  98.7 ms (1.0x), Avg.  98.7 ms, Total. 98.67 ms (0.2%)
+[Performance] Application.Shutdown.CleanupStdConverters                                                                                                    :        1 samples, Peak.  21.8 us (1.0x), Avg.  21.8 us, Total. 21.80 us (0.0%)
+[Performance] Application.Shutdown.UnloadAllPlatformSupportModuleNativeDlls                                                                                :        1 samples, Peak.   400 ns (1.0x), Avg.   400 ns, Total. 400.0 ns (0.0%)
+[Performance] Application.Shutdown.UnloadAllPlatformSupportNativeLibraries                                                                                 :        1 samples, Peak.   200 ns (1.0x), Avg.   200 ns, Total. 200.0 ns (0.0%)
+[Performance] Application.Shutdown.CleanupAutoDocumentation                                                                                                :        1 samples, Peak.   997 us (1.0x), Avg.   997 us, Total. 996.7 us (0.0%)
+[Performance] Application.Shutdown.ShaderNameManagerDestroy                                                                                                :        1 samples, Peak.   113 us (1.0x), Avg.   113 us, Total. 112.9 us (0.0%)
+[Performance] Application.Shutdown.CleanupCacheServer                                                                                                      :        1 samples, Peak.   300 ns (1.0x), Avg.   300 ns, Total. 300.0 ns (0.0%)
+[Performance] Application.Shutdown.Virtualization_Shutdown                                                                                                 :        1 samples, Peak.   400 ns (1.0x), Avg.   400 ns, Total. 400.0 ns (0.0%)
+[Performance] Application.Shutdown.DevConnections                                                                                                          :        1 samples, Peak.   136 us (1.0x), Avg.   136 us, Total. 135.8 us (0.0%)
+Exiting batchmode successfully now!
+Exiting without the bug reporter. Application will terminate with return code 0

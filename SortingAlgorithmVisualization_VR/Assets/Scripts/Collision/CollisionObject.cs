@@ -1,0 +1,197 @@
+using System;
+using System.Collections;
+using UnityEngine;
+
+namespace CollisionLab
+{
+    /// <summary>
+    /// Component attached to collision demonstration objects (Sphere and Cube).
+    /// Handles physical collision callbacks, impact debounce, and visual reaction (color flash).
+    /// </summary>
+    [RequireComponent(typeof(Collider))]
+    public class CollisionObject : MonoBehaviour
+    {
+        [Header("Object Configuration")]
+        [SerializeField] private string objectName = "Object";
+        [SerializeField] private bool isImpactor = false;
+
+        [Header("Visual Feedback")]
+        [SerializeField] private Color impactColor = new Color(0.0f, 0.9f, 0.46f, 1.0f); // Emerald flash
+        [SerializeField] private float colorFlashDuration = 0.5f;
+
+        private Rigidbody _rb;
+        private Renderer _renderer;
+        private Material _instancedMat;
+        private PhysicMaterial _instancedPhysicMat;
+        private Color _originalColor;
+        private Vector3 _initialPosition;
+        private Quaternion _initialRotation;
+        private Coroutine _flashCoroutine;
+
+        public string ObjectName => objectName;
+        public bool IsImpactor => isImpactor;
+        public Rigidbody Rigidbody => _rb;
+
+        /// <summary>
+        /// When true, physical collision callbacks are suppressed from reporting telemetry.
+        /// Used during VR grabbing/manipulation to prevent false collision measurements.
+        /// </summary>
+        public bool SuppressCollisionReports { get; set; } = false;
+
+        private void Awake()
+        {
+            _rb = GetComponent<Rigidbody>();
+            _renderer = GetComponent<Renderer>();
+
+            if (_renderer != null)
+            {
+                // Create instanced material to avoid modifying project asset files
+                _instancedMat = _renderer.material;
+                _originalColor = _instancedMat.color;
+            }
+
+            _initialPosition = transform.position;
+            _initialRotation = transform.rotation;
+        }
+
+        /// <summary>
+        /// Updates the Rigidbody mass safely.
+        /// </summary>
+        public void SetMass(float mass)
+        {
+            if (_rb == null) _rb = GetComponent<Rigidbody>();
+            if (_rb != null)
+            {
+                _rb.mass = Mathf.Max(0.01f, mass);
+            }
+        }
+
+        /// <summary>
+        /// Safely updates restitution (bounciness) using a runtime instanced PhysicMaterial,
+        /// ensuring shared project asset files are never modified.
+        /// </summary>
+        public void SetBounciness(float bounciness)
+        {
+            var col = GetComponent<Collider>();
+            if (col == null) return;
+
+            if (_instancedPhysicMat == null)
+            {
+                _instancedPhysicMat = new PhysicMaterial($"{name}_RuntimePhysicMat")
+                {
+                    dynamicFriction = 0.2f,
+                    staticFriction = 0.2f,
+                    bounceCombine = PhysicMaterialCombine.Maximum,
+                    frictionCombine = PhysicMaterialCombine.Minimum
+                };
+                col.material = _instancedPhysicMat;
+            }
+
+            _instancedPhysicMat.bounciness = Mathf.Clamp01(bounciness);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            // Ignore collisions with the floor or boundaries for impact telemetry
+            if (collision.gameObject.CompareTag("Floor") || collision.gameObject.name.Contains("Floor") || collision.gameObject.name.Contains("Wall"))
+            {
+                return;
+            }
+
+            // Trigger visual reaction
+            TriggerImpactVisual();
+
+            // Forward to manager for deduplicated telemetry logging
+            if (CollisionLabManager.Instance != null)
+            {
+                CollisionLabManager.Instance.ReportCollision(this, collision);
+            }
+        }
+
+        /// <summary>
+        /// Flashes the object's color temporarily on collision impact.
+        /// </summary>
+        public void TriggerImpactVisual()
+        {
+            if (_renderer == null || _instancedMat == null) return;
+
+            if (_flashCoroutine != null)
+            {
+                StopCoroutine(_flashCoroutine);
+            }
+            _flashCoroutine = StartCoroutine(FlashRoutine());
+        }
+
+        private IEnumerator FlashRoutine()
+        {
+            _instancedMat.color = impactColor;
+            
+            // Set emission if standard shader supports it
+            if (_instancedMat.HasProperty("_EmissionColor"))
+            {
+                _instancedMat.EnableKeyword("_EMISSION");
+                _instancedMat.SetColor("_EmissionColor", impactColor * 0.6f);
+            }
+
+            var elapsed = 0f;
+            while (elapsed < colorFlashDuration)
+            {
+                elapsed += Time.deltaTime;
+                var t = elapsed / colorFlashDuration;
+                // Smoothly lerp back to original color
+                _instancedMat.color = Color.Lerp(impactColor, _originalColor, t);
+                if (_instancedMat.HasProperty("_EmissionColor"))
+                {
+                    _instancedMat.SetColor("_EmissionColor", Color.Lerp(impactColor * 0.6f, Color.black, t));
+                }
+                yield return null;
+            }
+
+            _instancedMat.color = _originalColor;
+            if (_instancedMat.HasProperty("_EmissionColor"))
+            {
+                _instancedMat.SetColor("_EmissionColor", Color.black);
+            }
+            _flashCoroutine = null;
+        }
+
+        /// <summary>
+        /// Resets position, rotation, velocities, and visual material to the initial state.
+        /// </summary>
+        public void ResetToInitialState()
+        {
+            SuppressCollisionReports = false;
+            if (_flashCoroutine != null)
+            {
+                StopCoroutine(_flashCoroutine);
+                _flashCoroutine = null;
+            }
+
+            transform.position = _initialPosition;
+            transform.rotation = _initialRotation;
+
+            if (_rb != null)
+            {
+                _rb.velocity = Vector3.zero;
+                _rb.angularVelocity = Vector3.zero;
+                _rb.Sleep();
+                _rb.WakeUp();
+            }
+
+            if (_instancedMat != null)
+            {
+                _instancedMat.color = _originalColor;
+                if (_instancedMat.HasProperty("_EmissionColor"))
+                {
+                    _instancedMat.SetColor("_EmissionColor", Color.black);
+                }
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (_instancedMat != null) Destroy(_instancedMat);
+            if (_instancedPhysicMat != null) Destroy(_instancedPhysicMat);
+        }
+    }
+}

@@ -1,0 +1,1678 @@
+
+========== CollisionObject.cs ==========
+using System;
+using System.Collections;
+using UnityEngine;
+
+namespace CollisionLab
+{
+    /// <summary>
+    /// Component attached to collision demonstration objects (Sphere and Cube).
+    /// Handles physical collision callbacks, impact debounce, and visual reaction (color flash).
+    /// </summary>
+    [RequireComponent(typeof(Collider))]
+    public class CollisionObject : MonoBehaviour
+    {
+        [Header("Object Configuration")]
+        [SerializeField] private string objectName = "Object";
+        [SerializeField] private bool isImpactor = false;
+
+        [Header("Visual Feedback")]
+        [SerializeField] private Color impactColor = new Color(0.0f, 0.9f, 0.46f, 1.0f); // Emerald flash
+        [SerializeField] private float colorFlashDuration = 0.5f;
+
+        private Rigidbody _rb;
+        private Renderer _renderer;
+        private Material _instancedMat;
+        private PhysicMaterial _instancedPhysicMat;
+        private Color _originalColor;
+        private Vector3 _initialPosition;
+        private Quaternion _initialRotation;
+        private Coroutine _flashCoroutine;
+
+        public string ObjectName => objectName;
+        public bool IsImpactor => isImpactor;
+        public Rigidbody Rigidbody => _rb;
+
+        private void Awake()
+        {
+            _rb = GetComponent<Rigidbody>();
+            _renderer = GetComponent<Renderer>();
+
+            if (_renderer != null)
+            {
+                // Create instanced material to avoid modifying project asset files
+                _instancedMat = _renderer.material;
+                _originalColor = _instancedMat.color;
+            }
+
+            _initialPosition = transform.position;
+            _initialRotation = transform.rotation;
+        }
+
+        /// <summary>
+        /// Updates the Rigidbody mass safely.
+        /// </summary>
+        public void SetMass(float mass)
+        {
+            if (_rb == null) _rb = GetComponent<Rigidbody>();
+            if (_rb != null)
+            {
+                _rb.mass = Mathf.Max(0.01f, mass);
+            }
+        }
+
+        /// <summary>
+        /// Safely updates restitution (bounciness) using a runtime instanced PhysicMaterial,
+        /// ensuring shared project asset files are never modified.
+        /// </summary>
+        public void SetBounciness(float bounciness)
+        {
+            var col = GetComponent<Collider>();
+            if (col == null) return;
+
+            if (_instancedPhysicMat == null)
+            {
+                _instancedPhysicMat = new PhysicMaterial($"{name}_RuntimePhysicMat")
+                {
+                    dynamicFriction = 0.2f,
+                    staticFriction = 0.2f,
+                    bounceCombine = PhysicMaterialCombine.Maximum,
+                    frictionCombine = PhysicMaterialCombine.Minimum
+                };
+                col.material = _instancedPhysicMat;
+            }
+
+            _instancedPhysicMat.bounciness = Mathf.Clamp01(bounciness);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            // Ignore collisions with the floor or boundaries for impact telemetry
+            if (collision.gameObject.CompareTag("Floor") || collision.gameObject.name.Contains("Floor") || collision.gameObject.name.Contains("Wall"))
+            {
+                return;
+            }
+
+            // Trigger visual reaction
+            TriggerImpactVisual();
+
+            // Forward to manager for deduplicated telemetry logging
+            if (CollisionLabManager.Instance != null)
+            {
+                CollisionLabManager.Instance.ReportCollision(this, collision);
+            }
+        }
+
+        /// <summary>
+        /// Flashes the object's color temporarily on collision impact.
+        /// </summary>
+        public void TriggerImpactVisual()
+        {
+            if (_renderer == null || _instancedMat == null) return;
+
+            if (_flashCoroutine != null)
+            {
+                StopCoroutine(_flashCoroutine);
+            }
+            _flashCoroutine = StartCoroutine(FlashRoutine());
+        }
+
+        private IEnumerator FlashRoutine()
+        {
+            _instancedMat.color = impactColor;
+            
+            // Set emission if standard shader supports it
+            if (_instancedMat.HasProperty("_EmissionColor"))
+            {
+                _instancedMat.EnableKeyword("_EMISSION");
+                _instancedMat.SetColor("_EmissionColor", impactColor * 0.6f);
+            }
+
+            var elapsed = 0f;
+            while (elapsed < colorFlashDuration)
+            {
+                elapsed += Time.deltaTime;
+                var t = elapsed / colorFlashDuration;
+                // Smoothly lerp back to original color
+                _instancedMat.color = Color.Lerp(impactColor, _originalColor, t);
+                if (_instancedMat.HasProperty("_EmissionColor"))
+                {
+                    _instancedMat.SetColor("_EmissionColor", Color.Lerp(impactColor * 0.6f, Color.black, t));
+                }
+                yield return null;
+            }
+
+            _instancedMat.color = _originalColor;
+            if (_instancedMat.HasProperty("_EmissionColor"))
+            {
+                _instancedMat.SetColor("_EmissionColor", Color.black);
+            }
+            _flashCoroutine = null;
+        }
+
+        /// <summary>
+        /// Resets position, rotation, velocities, and visual material to the initial state.
+        /// </summary>
+        public void ResetToInitialState()
+        {
+            if (_flashCoroutine != null)
+            {
+                StopCoroutine(_flashCoroutine);
+                _flashCoroutine = null;
+            }
+
+            transform.position = _initialPosition;
+            transform.rotation = _initialRotation;
+
+            if (_rb != null)
+            {
+                _rb.velocity = Vector3.zero;
+                _rb.angularVelocity = Vector3.zero;
+                _rb.Sleep();
+                _rb.WakeUp();
+            }
+
+            if (_instancedMat != null)
+            {
+                _instancedMat.color = _originalColor;
+                if (_instancedMat.HasProperty("_EmissionColor"))
+                {
+                    _instancedMat.SetColor("_EmissionColor", Color.black);
+                }
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (_instancedMat != null) Destroy(_instancedMat);
+            if (_instancedPhysicMat != null) Destroy(_instancedPhysicMat);
+        }
+    }
+}
+
+========== VRSceneBuilder.cs ==========
+using System;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.UI;
+using Unity.XR.CoreUtils;
+using CollisionLab;
+using CollisionLab.VR;
+
+public static class VRSceneBuilder
+{
+    [MenuItem("VR/Build CollisionLab_VR Scene")]
+    public static void BuildVRScene()
+    {
+        Debug.Log("[VRSceneBuilder] Starting VR Scene Construction...");
+
+        // 1. Open CollisionLab.unity as base
+        string sourceScenePath = "Assets/Scenes/CollisionLab.unity";
+        string targetScenePath = "Assets/Scenes/CollisionLab_VR.unity";
+
+        var scene = EditorSceneManager.OpenScene(sourceScenePath, OpenSceneMode.Single);
+        if (!scene.IsValid())
+        {
+            Debug.LogError($"[VRSceneBuilder] Failed to open base scene: {sourceScenePath}");
+            return;
+        }
+
+        // 2. Remove desktop Main Camera and desktop Canvas & EventSystem
+        var desktopCam = GameObject.Find("Main Camera");
+        if (desktopCam != null)
+        {
+            Debug.Log("[VRSceneBuilder] Removing desktop camera...");
+            UnityEngine.Object.DestroyImmediate(desktopCam);
+        }
+
+        var desktopCanvas = GameObject.Find("Canvas");
+        if (desktopCanvas != null)
+        {
+            Debug.Log("[VRSceneBuilder] Removing desktop canvas...");
+            UnityEngine.Object.DestroyImmediate(desktopCanvas);
+        }
+
+        var desktopEventSystem = GameObject.Find("EventSystem");
+        if (desktopEventSystem != null)
+        {
+            Debug.Log("[VRSceneBuilder] Removing desktop EventSystem...");
+            UnityEngine.Object.DestroyImmediate(desktopEventSystem);
+        }
+
+        // 3. Configure Floor with TeleportationArea
+        var floor = GameObject.Find("Floor");
+        if (floor != null)
+        {
+            if (floor.GetComponent<TeleportationArea>() == null)
+            {
+                Debug.Log("[VRSceneBuilder] Adding TeleportationArea to Floor...");
+                floor.AddComponent<TeleportationArea>();
+            }
+        }
+
+        // 4. Instantiate XR Interaction Setup prefab
+        string xrSetupPrefabPath = "Assets/Samples/XR Interaction Toolkit/2.6.3/Starter Assets/Prefabs/XR Interaction Setup.prefab";
+        var xrSetupPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(xrSetupPrefabPath);
+        if (xrSetupPrefab == null)
+        {
+            Debug.LogError($"[VRSceneBuilder] Failed to load XR Interaction Setup prefab at {xrSetupPrefabPath}");
+            return;
+        }
+
+        var xrSetupInstance = (GameObject)PrefabUtility.InstantiatePrefab(xrSetupPrefab);
+        xrSetupInstance.name = "XR Interaction Setup";
+        xrSetupInstance.transform.position = new Vector3(0f, 0f, -4.5f);
+        xrSetupInstance.transform.rotation = Quaternion.identity;
+        Debug.Log("[VRSceneBuilder] Instantiated XR Interaction Setup at (0, 0, -4.5)");
+
+        // 5. Instantiate XR Device Simulator prefab
+        string simPrefabPath = "Assets/Samples/XR Interaction Toolkit/2.6.3/XR Device Simulator/XR Device Simulator.prefab";
+        var simPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(simPrefabPath);
+        if (simPrefab != null)
+        {
+            var simInstance = (GameObject)PrefabUtility.InstantiatePrefab(simPrefab);
+            simInstance.name = "XR Device Simulator";
+            Debug.Log("[VRSceneBuilder] Instantiated XR Device Simulator.");
+        }
+        else
+        {
+            Debug.LogWarning($"[VRSceneBuilder] XR Device Simulator prefab not found at {simPrefabPath}");
+        }
+
+        // 6. Create Grabbable Test Pedestal and Cube
+        CreateGrabbableTestObject();
+
+        // 7. Create World-Space Control Canvas & UI
+        var vrCanvasGO = CreateWorldSpaceCanvas(out var uiRefs);
+
+        // 8. Add XRSceneBootstrap
+        var bootstrapGO = new GameObject("XRSceneBootstrap");
+        bootstrapGO.AddComponent<XRSceneBootstrap>();
+
+        // 9. Configure CollisionLabManager
+        WireCollisionLabManager(uiRefs);
+
+        // 10. Save as CollisionLab_VR.unity
+        bool saved = EditorSceneManager.SaveScene(scene, targetScenePath);
+        if (saved)
+        {
+            Debug.Log($"[VRSceneBuilder] Successfully saved VR scene to {targetScenePath}");
+        }
+        else
+        {
+            Debug.LogError($"[VRSceneBuilder] Failed to save VR scene to {targetScenePath}");
+            return;
+        }
+
+        // 11. Update EditorBuildSettings
+        UpdateBuildSettings(targetScenePath);
+
+        Debug.Log("[VRSceneBuilder] Build completed successfully!");
+    }
+
+    private static void CreateGrabbableTestObject()
+    {
+        // Pedestal
+        var pedestal = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        pedestal.name = "CalibrationPedestal";
+        pedestal.transform.position = new Vector3(1.6f, 0.4f, -3.2f);
+        pedestal.transform.localScale = new Vector3(0.5f, 0.4f, 0.5f);
+        var pedRenderer = pedestal.GetComponent<Renderer>();
+        if (pedRenderer != null)
+        {
+            pedRenderer.material.color = new Color(0.18f, 0.22f, 0.28f); // Dark Slate
+        }
+
+        // Grabbable Cube
+        var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cube.name = "VRCalibrationCube";
+        cube.transform.position = new Vector3(1.6f, 0.95f, -3.2f);
+        cube.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+
+        var rb = cube.GetComponent<Rigidbody>();
+        if (rb == null) rb = cube.AddComponent<Rigidbody>();
+        rb.mass = 0.5f;
+        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+
+        var grab = cube.AddComponent<XRGrabInteractable>();
+        grab.movementType = XRBaseInteractable.MovementType.VelocityTracking;
+        grab.throwOnDetach = true;
+
+        var cubeRenderer = cube.GetComponent<Renderer>();
+        if (cubeRenderer != null)
+        {
+            cubeRenderer.material.color = new Color(0.95f, 0.7f, 0.1f); // Vibrant Gold
+        }
+
+        Debug.Log("[VRSceneBuilder] Created Grabbable Calibration Cube on Pedestal.");
+    }
+
+    public class VRUIRefs
+    {
+        public Button launchBtn;
+        public Button resetBtn;
+        public Button backBtn;
+
+        public Slider speedSlider;
+        public Text speedText;
+        public Button speedDown;
+        public Button speedUp;
+
+        public Slider sphereMassSlider;
+        public Text sphereMassText;
+        public Button sphereMassDown;
+        public Button sphereMassUp;
+
+        public Slider cubeMassSlider;
+        public Text cubeMassText;
+        public Button cubeMassDown;
+        public Button cubeMassUp;
+
+        public Slider restitutionSlider;
+        public Text restitutionText;
+        public Button restitutionDown;
+        public Button restitutionUp;
+
+        public Button presetEqual;
+        public Button presetHeavyImpactor;
+        public Button presetHeavyTarget;
+        public Button presetElastic;
+        public Button presetInelastic;
+
+        public Text stateText;
+        public Text impactCountText;
+        public Text relVelText;
+        public Text impulseText;
+        public Text contactPointText;
+        public Text contactNormalText;
+        public Text momentumBeforeText;
+        public Text momentumAfterText;
+        public Text momentumErrorText;
+        public Text kineticEnergyText;
+        public Text measuredRestitutionText;
+    }
+
+    private static GameObject CreateWorldSpaceCanvas(out VRUIRefs refs)
+    {
+        refs = new VRUIRefs();
+
+        var canvasGO = new GameObject("VR_WorldSpace_Canvas");
+        canvasGO.transform.position = new Vector3(-2.1f, 1.35f, -2.6f);
+        canvasGO.transform.rotation = Quaternion.Euler(0f, 26f, 0f);
+
+        var canvas = canvasGO.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.WorldSpace;
+
+        var rt = canvasGO.GetComponent<RectTransform>();
+        rt.sizeDelta = new Vector2(1050f, 750f);
+        rt.localScale = new Vector3(0.0018f, 0.0018f, 0.0018f);
+
+        canvasGO.AddComponent<CanvasScaler>();
+        canvasGO.AddComponent<GraphicRaycaster>();
+        canvasGO.AddComponent<TrackedDeviceGraphicRaycaster>();
+
+        Font defaultFont = Resources.GetBuiltinResource<Font>("Arial.ttf");
+
+        // Background Panel
+        var bgGO = new GameObject("BackgroundPanel");
+        bgGO.transform.SetParent(canvasGO.transform, false);
+        var bgRT = bgGO.AddComponent<RectTransform>();
+        bgRT.anchorMin = Vector2.zero;
+        bgRT.anchorMax = Vector2.one;
+        bgRT.sizeDelta = Vector2.zero;
+        var bgImage = bgGO.AddComponent<Image>();
+        bgImage.color = new Color(0.06f, 0.08f, 0.12f, 0.95f); // Sleek modern dark blue-gray
+
+        // Header Panel
+        var headerGO = new GameObject("Header");
+        headerGO.transform.SetParent(bgGO.transform, false);
+        var headerRT = headerGO.AddComponent<RectTransform>();
+        headerRT.anchorMin = new Vector2(0f, 0.88f);
+        headerRT.anchorMax = new Vector2(1f, 1f);
+        headerRT.sizeDelta = Vector2.zero;
+
+        var titleGO = new GameObject("TitleText");
+        titleGO.transform.SetParent(headerGO.transform, false);
+        var titleRT = titleGO.AddComponent<RectTransform>();
+        titleRT.anchorMin = Vector2.zero;
+        titleRT.anchorMax = Vector2.one;
+        titleRT.sizeDelta = Vector2.zero;
+        var titleText = titleGO.AddComponent<Text>();
+        titleText.font = defaultFont;
+        titleText.text = "VR COLLISION PHYSICS LABORATORY";
+        titleText.fontSize = 28;
+        titleText.fontStyle = FontStyle.Bold;
+        titleText.alignment = TextAnchor.MiddleCenter;
+        titleText.color = new Color(0.22f, 0.74f, 0.97f); // Vibrant Cyan
+
+        // Main Actions Row (Launch, Reset, Desktop)
+        var actionsGO = new GameObject("ActionsRow");
+        actionsGO.transform.SetParent(bgGO.transform, false);
+        var actionsRT = actionsGO.AddComponent<RectTransform>();
+        actionsRT.anchorMin = new Vector2(0.05f, 0.77f);
+        actionsRT.anchorMax = new Vector2(0.95f, 0.87f);
+        actionsRT.sizeDelta = Vector2.zero;
+
+        refs.launchBtn = CreateButton(actionsGO.transform, "LaunchBtn", "LAUNCH SIMULATION", new Vector2(-310f, 0f), new Vector2(280f, 50f), new Color(0.06f, 0.72f, 0.5f), defaultFont, 20);
+        refs.resetBtn = CreateButton(actionsGO.transform, "ResetBtn", "RESET SIMULATION", new Vector2(0f, 0f), new Vector2(280f, 50f), new Color(0.93f, 0.27f, 0.27f), defaultFont, 20);
+        refs.backBtn = CreateButton(actionsGO.transform, "BackBtn", "MAIN MENU", new Vector2(310f, 0f), new Vector2(280f, 50f), new Color(0.39f, 0.4f, 0.95f), defaultFont, 20);
+
+        // Left Column: Parameters & Presets
+        var leftColGO = new GameObject("ParametersColumn");
+        leftColGO.transform.SetParent(bgGO.transform, false);
+        var leftRT = leftColGO.AddComponent<RectTransform>();
+        leftRT.anchorMin = new Vector2(0.04f, 0.04f);
+        leftRT.anchorMax = new Vector2(0.51f, 0.75f);
+        leftRT.sizeDelta = Vector2.zero;
+
+        // Sliders
+        float yPos = 210f;
+        float ySpacing = 72f;
+
+        CreateSliderRow(leftColGO.transform, "Speed", "Launch Speed", yPos, defaultFont, out refs.speedSlider, out refs.speedText, out refs.speedDown, out refs.speedUp);
+        yPos -= ySpacing;
+        CreateSliderRow(leftColGO.transform, "SphereMass", "Sphere Mass", yPos, defaultFont, out refs.sphereMassSlider, out refs.sphereMassText, out refs.sphereMassDown, out refs.sphereMassUp);
+        yPos -= ySpacing;
+        CreateSliderRow(leftColGO.transform, "CubeMass", "Cube Mass", yPos, defaultFont, out refs.cubeMassSlider, out refs.cubeMassText, out refs.cubeMassDown, out refs.cubeMassUp);
+        yPos -= ySpacing;
+        CreateSliderRow(leftColGO.transform, "Restitution", "Restitution (e)", yPos, defaultFont, out refs.restitutionSlider, out refs.restitutionText, out refs.restitutionDown, out refs.restitutionUp);
+
+        // Presets Label & Row
+        var presetLabel = CreateText(leftColGO.transform, "PresetLabel", "Physics Collision Presets:", new Vector2(0f, -85f), new Vector2(460f, 25f), defaultFont, 16, FontStyle.Bold, new Color(0.9f, 0.9f, 0.95f), TextAnchor.MiddleLeft);
+
+        var presetsRowGO = new GameObject("PresetsRow");
+        presetsRowGO.transform.SetParent(leftColGO.transform, false);
+        var prRT = presetsRowGO.AddComponent<RectTransform>();
+        prRT.anchoredPosition = new Vector2(0f, -130f);
+        prRT.sizeDelta = new Vector2(460f, 40f);
+
+        refs.presetEqual = CreateButton(presetsRowGO.transform, "PresetEqual", "Equal (1:1)", new Vector2(-180f, 0f), new Vector2(85f, 36f), new Color(0.2f, 0.25f, 0.35f), defaultFont, 12);
+        refs.presetHeavyImpactor = CreateButton(presetsRowGO.transform, "PresetHeavyImpactor", "Heavy (3:1)", new Vector2(-90f, 0f), new Vector2(85f, 36f), new Color(0.2f, 0.25f, 0.35f), defaultFont, 12);
+        refs.presetHeavyTarget = CreateButton(presetsRowGO.transform, "PresetHeavyTarget", "Target (1:3)", new Vector2(0f, 0f), new Vector2(85f, 36f), new Color(0.2f, 0.25f, 0.35f), defaultFont, 12);
+        refs.presetElastic = CreateButton(presetsRowGO.transform, "PresetElastic", "Elastic (e=1)", new Vector2(90f, 0f), new Vector2(85f, 36f), new Color(0.2f, 0.25f, 0.35f), defaultFont, 12);
+        refs.presetInelastic = CreateButton(presetsRowGO.transform, "PresetInelastic", "Inelastic (e=0)", new Vector2(180f, 0f), new Vector2(85f, 36f), new Color(0.2f, 0.25f, 0.35f), defaultFont, 12);
+
+        // Right Column: Telemetry & Conservation
+        var rightColGO = new GameObject("TelemetryColumn");
+        rightColGO.transform.SetParent(bgGO.transform, false);
+        var rightRT = rightColGO.AddComponent<RectTransform>();
+        rightRT.anchorMin = new Vector2(0.53f, 0.04f);
+        rightRT.anchorMax = new Vector2(0.96f, 0.75f);
+        rightRT.sizeDelta = Vector2.zero;
+
+        var telemBg = rightColGO.AddComponent<Image>();
+        telemBg.color = new Color(0.03f, 0.04f, 0.07f, 0.85f);
+
+        CreateText(rightColGO.transform, "TelemTitle", "REAL-TIME TELEMETRY & CONSERVATION", new Vector2(0f, 220f), new Vector2(420f, 30f), defaultFont, 18, FontStyle.Bold, new Color(0.38f, 0.85f, 0.98f), TextAnchor.MiddleCenter);
+
+        float tY = 180f;
+        float tStep = 36f;
+
+        refs.stateText = CreateTelemetryLine(rightColGO.transform, "StateLine", "Simulation State:", "Ready", tY, defaultFont);
+        tY -= tStep;
+        refs.impactCountText = CreateTelemetryLine(rightColGO.transform, "ImpactCountLine", "Impact Count:", "0", tY, defaultFont);
+        tY -= tStep;
+        refs.relVelText = CreateTelemetryLine(rightColGO.transform, "RelVelLine", "Relative Velocity:", "8.00 m/s", tY, defaultFont);
+        tY -= tStep;
+        refs.impulseText = CreateTelemetryLine(rightColGO.transform, "ImpulseLine", "Calculated Impulse:", "0.00 Ns", tY, defaultFont);
+        tY -= tStep;
+        refs.contactPointText = CreateTelemetryLine(rightColGO.transform, "ContactPointLine", "Contact Point:", "(0.00, 0.00, 0.00)", tY, defaultFont);
+        tY -= tStep;
+        refs.contactNormalText = CreateTelemetryLine(rightColGO.transform, "ContactNormalLine", "Contact Normal:", "(0.00, 0.00, 0.00)", tY, defaultFont);
+        tY -= tStep;
+        refs.momentumBeforeText = CreateTelemetryLine(rightColGO.transform, "MomBeforeLine", "Momentum Initial (P1+P2):", "8.00 kg*m/s", tY, defaultFont);
+        tY -= tStep;
+        refs.momentumAfterText = CreateTelemetryLine(rightColGO.transform, "MomAfterLine", "Momentum Final (P1'+P2'):", "8.00 kg*m/s", tY, defaultFont);
+        tY -= tStep;
+        refs.momentumErrorText = CreateTelemetryLine(rightColGO.transform, "MomErrorLine", "Conservation Error (ΔP):", "0.00%", tY, defaultFont);
+        tY -= tStep;
+        refs.kineticEnergyText = CreateTelemetryLine(rightColGO.transform, "KELossLine", "Kinetic Energy Loss (ΔKE):", "0.00 J", tY, defaultFont);
+        tY -= tStep;
+        refs.measuredRestitutionText = CreateTelemetryLine(rightColGO.transform, "MeasRestLine", "Measured Restitution (e):", "--", tY, defaultFont);
+
+        return canvasGO;
+    }
+
+    private static Text CreateTelemetryLine(Transform parent, string name, string label, string defaultValue, float yPos, Font font)
+    {
+        var lineGO = new GameObject(name);
+        lineGO.transform.SetParent(parent, false);
+        var rt = lineGO.AddComponent<RectTransform>();
+        rt.anchoredPosition = new Vector2(0f, yPos);
+        rt.sizeDelta = new Vector2(410f, 30f);
+
+        // Label
+        var lblGO = new GameObject("Label");
+        lblGO.transform.SetParent(lineGO.transform, false);
+        var lblRT = lblGO.AddComponent<RectTransform>();
+        lblRT.anchorMin = new Vector2(0f, 0f);
+        lblRT.anchorMax = new Vector2(0.55f, 1f);
+        lblRT.sizeDelta = Vector2.zero;
+        var lblText = lblGO.AddComponent<Text>();
+        lblText.font = font;
+        lblText.text = label;
+        lblText.fontSize = 13;
+        lblText.alignment = TextAnchor.MiddleLeft;
+        lblText.color = new Color(0.7f, 0.75f, 0.85f);
+
+        // Value
+        var valGO = new GameObject("Value");
+        valGO.transform.SetParent(lineGO.transform, false);
+        var valRT = valGO.AddComponent<RectTransform>();
+        valRT.anchorMin = new Vector2(0.55f, 0f);
+        valRT.anchorMax = new Vector2(1f, 1f);
+        valRT.sizeDelta = Vector2.zero;
+        var valText = valGO.AddComponent<Text>();
+        valText.font = font;
+        valText.text = defaultValue;
+        valText.fontSize = 13;
+        valText.fontStyle = FontStyle.Bold;
+        valText.alignment = TextAnchor.MiddleRight;
+        valText.color = new Color(0.38f, 0.85f, 0.98f); // Cyan accent
+
+        return valText;
+    }
+
+    private static void CreateSliderRow(Transform parent, string id, string label, float yPos, Font font, out Slider slider, out Text valueText, out Button downBtn, out Button upBtn)
+    {
+        var rowGO = new GameObject(id + "Row");
+        rowGO.transform.SetParent(parent, false);
+        var rt = rowGO.AddComponent<RectTransform>();
+        rt.anchoredPosition = new Vector2(0f, yPos);
+        rt.sizeDelta = new Vector2(460f, 55f);
+
+        // Label
+        var lbl = CreateText(rowGO.transform, "Label", label, new Vector2(-120f, 15f), new Vector2(200f, 25f), font, 15, FontStyle.Bold, new Color(0.85f, 0.9f, 0.95f), TextAnchor.MiddleLeft);
+
+        // Value Text
+        valueText = CreateText(rowGO.transform, "ValText", "--", new Vector2(160f, 15f), new Vector2(120f, 25f), font, 15, FontStyle.Bold, new Color(0.38f, 0.85f, 0.98f), TextAnchor.MiddleRight);
+
+        // Down Button [-]
+        downBtn = CreateButton(rowGO.transform, "DownBtn", "−", new Vector2(-190f, -15f), new Vector2(40f, 32f), new Color(0.2f, 0.25f, 0.35f), font, 18);
+
+        // Up Button [+]
+        upBtn = CreateButton(rowGO.transform, "UpBtn", "+", new Vector2(190f, -15f), new Vector2(40f, 32f), new Color(0.2f, 0.25f, 0.35f), font, 18);
+
+        // Slider
+        var sliderGO = new GameObject("Slider");
+        sliderGO.transform.SetParent(rowGO.transform, false);
+        var sRT = sliderGO.AddComponent<RectTransform>();
+        sRT.anchoredPosition = new Vector2(0f, -15f);
+        sRT.sizeDelta = new Vector2(310f, 26f);
+
+        slider = sliderGO.AddComponent<Slider>();
+
+        // Slider background
+        var sBg = new GameObject("Background");
+        sBg.transform.SetParent(sliderGO.transform, false);
+        var sBgRT = sBg.AddComponent<RectTransform>();
+        sBgRT.anchorMin = new Vector2(0f, 0.35f);
+        sBgRT.anchorMax = new Vector2(1f, 0.65f);
+        sBgRT.sizeDelta = Vector2.zero;
+        var sBgImg = sBg.AddComponent<Image>();
+        sBgImg.color = new Color(0.12f, 0.16f, 0.22f);
+
+        // Slider Fill Area
+        var fillArea = new GameObject("Fill Area");
+        fillArea.transform.SetParent(sliderGO.transform, false);
+        var faRT = fillArea.AddComponent<RectTransform>();
+        faRT.anchorMin = new Vector2(0f, 0.35f);
+        faRT.anchorMax = new Vector2(1f, 0.65f);
+        faRT.sizeDelta = Vector2.zero;
+
+        var fill = new GameObject("Fill");
+        fill.transform.SetParent(fillArea.transform, false);
+        var fillRT = fill.AddComponent<RectTransform>();
+        fillRT.sizeDelta = Vector2.zero;
+        var fillImg = fill.AddComponent<Image>();
+        fillImg.color = new Color(0.22f, 0.74f, 0.97f);
+
+        slider.fillRect = fillRT;
+
+        // Slider Handle Slide Area
+        var handleArea = new GameObject("Handle Slide Area");
+        handleArea.transform.SetParent(sliderGO.transform, false);
+        var haRT = handleArea.AddComponent<RectTransform>();
+        haRT.anchorMin = Vector2.zero;
+        haRT.anchorMax = Vector2.one;
+        haRT.sizeDelta = Vector2.zero;
+
+        var handle = new GameObject("Handle");
+        handle.transform.SetParent(handleArea.transform, false);
+        var hRT = handle.AddComponent<RectTransform>();
+        hRT.sizeDelta = new Vector2(24f, 24f);
+        var hImg = handle.AddComponent<Image>();
+        hImg.color = Color.white;
+
+        slider.handleRect = hRT;
+        slider.targetGraphic = hImg;
+    }
+
+    private static Button CreateButton(Transform parent, string name, string label, Vector2 pos, Vector2 size, Color bgColor, Font font, int fontSize)
+    {
+        var btnGO = new GameObject(name);
+        btnGO.transform.SetParent(parent, false);
+        var rt = btnGO.AddComponent<RectTransform>();
+        rt.anchoredPosition = pos;
+        rt.sizeDelta = size;
+
+        var img = btnGO.AddComponent<Image>();
+        img.color = bgColor;
+
+        var btn = btnGO.AddComponent<Button>();
+        btn.targetGraphic = img;
+
+        var colors = btn.colors;
+        colors.normalColor = bgColor;
+        colors.highlightedColor = bgColor * 1.25f;
+        colors.pressedColor = bgColor * 0.8f;
+        btn.colors = colors;
+
+        var textGO = new GameObject("Text");
+        textGO.transform.SetParent(btnGO.transform, false);
+        var textRT = textGO.AddComponent<RectTransform>();
+        textRT.anchorMin = Vector2.zero;
+        textRT.anchorMax = Vector2.one;
+        textRT.sizeDelta = Vector2.zero;
+
+        var text = textGO.AddComponent<Text>();
+        text.font = font;
+        text.text = label;
+        text.fontSize = fontSize;
+        text.fontStyle = FontStyle.Bold;
+        text.alignment = TextAnchor.MiddleCenter;
+        text.color = Color.white;
+
+        return btn;
+    }
+
+    private static Text CreateText(Transform parent, string name, string content, Vector2 pos, Vector2 size, Font font, int fontSize, FontStyle style, Color color, TextAnchor align)
+    {
+        var go = new GameObject(name);
+        go.transform.SetParent(parent, false);
+        var rt = go.AddComponent<RectTransform>();
+        rt.anchoredPosition = pos;
+        rt.sizeDelta = size;
+
+        var text = go.AddComponent<Text>();
+        text.font = font;
+        text.text = content;
+        text.fontSize = fontSize;
+        text.fontStyle = style;
+        text.color = color;
+        text.alignment = align;
+
+        return text;
+    }
+
+    private static void WireCollisionLabManager(VRUIRefs refs)
+    {
+        var managerGO = GameObject.Find("CollisionLabManager");
+        if (managerGO == null)
+        {
+            managerGO = new GameObject("CollisionLabManager");
+        }
+
+        var mgr = managerGO.GetComponent<CollisionLabManager>();
+        if (mgr == null)
+        {
+            mgr = managerGO.AddComponent<CollisionLabManager>();
+        }
+
+        var so = new SerializedObject(mgr);
+
+        // Physical demonstration objects
+        var sphere = GameObject.Find("Sphere");
+        var cube = GameObject.Find("Cube");
+
+        if (sphere != null)
+        {
+            so.FindProperty("sphereObject").objectReferenceValue = sphere.GetComponent<CollisionObject>();
+            so.FindProperty("sphereRigidbody").objectReferenceValue = sphere.GetComponent<Rigidbody>();
+            so.FindProperty("sphereVectorVisualizer").objectReferenceValue = sphere.GetComponent<PhysicsVectorVisualizer>();
+        }
+
+        if (cube != null)
+        {
+            so.FindProperty("cubeObject").objectReferenceValue = cube.GetComponent<CollisionObject>();
+            so.FindProperty("cubeRigidbody").objectReferenceValue = cube.GetComponent<Rigidbody>();
+            so.FindProperty("cubeVectorVisualizer").objectReferenceValue = cube.GetComponent<PhysicsVectorVisualizer>();
+        }
+
+        var contactVisualizer = GameObject.FindObjectOfType<ContactManifoldVisualizer>();
+        if (contactVisualizer != null)
+        {
+            so.FindProperty("contactVisualizer").objectReferenceValue = contactVisualizer;
+        }
+
+        // Sliders & controls
+        so.FindProperty("speedSlider").objectReferenceValue = refs.speedSlider;
+        so.FindProperty("speedValueText").objectReferenceValue = refs.speedText;
+        so.FindProperty("speedDownButton").objectReferenceValue = refs.speedDown;
+        so.FindProperty("speedUpButton").objectReferenceValue = refs.speedUp;
+
+        so.FindProperty("sphereMassSlider").objectReferenceValue = refs.sphereMassSlider;
+        so.FindProperty("sphereMassValueText").objectReferenceValue = refs.sphereMassText;
+        so.FindProperty("sphereMassDownButton").objectReferenceValue = refs.sphereMassDown;
+        so.FindProperty("sphereMassUpButton").objectReferenceValue = refs.sphereMassUp;
+
+        so.FindProperty("cubeMassSlider").objectReferenceValue = refs.cubeMassSlider;
+        so.FindProperty("cubeMassValueText").objectReferenceValue = refs.cubeMassText;
+        so.FindProperty("cubeMassDownButton").objectReferenceValue = refs.cubeMassDown;
+        so.FindProperty("cubeMassUpButton").objectReferenceValue = refs.cubeMassUp;
+
+        so.FindProperty("restitutionSlider").objectReferenceValue = refs.restitutionSlider;
+        so.FindProperty("restitutionValueText").objectReferenceValue = refs.restitutionText;
+        so.FindProperty("restitutionDownButton").objectReferenceValue = refs.restitutionDown;
+        so.FindProperty("restitutionUpButton").objectReferenceValue = refs.restitutionUp;
+
+        // Presets
+        so.FindProperty("presetEqualButton").objectReferenceValue = refs.presetEqual;
+        so.FindProperty("presetHeavyImpactorButton").objectReferenceValue = refs.presetHeavyImpactor;
+        so.FindProperty("presetHeavyTargetButton").objectReferenceValue = refs.presetHeavyTarget;
+        so.FindProperty("presetElasticButton").objectReferenceValue = refs.presetElastic;
+        so.FindProperty("presetInelasticButton").objectReferenceValue = refs.presetInelastic;
+
+        // Telemetry texts
+        so.FindProperty("stateText").objectReferenceValue = refs.stateText;
+        so.FindProperty("impactCountText").objectReferenceValue = refs.impactCountText;
+        so.FindProperty("relativeVelocityText").objectReferenceValue = refs.relVelText;
+        so.FindProperty("impulseText").objectReferenceValue = refs.impulseText;
+        so.FindProperty("contactPointText").objectReferenceValue = refs.contactPointText;
+        so.FindProperty("contactNormalText").objectReferenceValue = refs.contactNormalText;
+        so.FindProperty("momentumBeforeText").objectReferenceValue = refs.momentumBeforeText;
+        so.FindProperty("momentumAfterText").objectReferenceValue = refs.momentumAfterText;
+        so.FindProperty("momentumErrorText").objectReferenceValue = refs.momentumErrorText;
+        so.FindProperty("kineticEnergyText").objectReferenceValue = refs.kineticEnergyText;
+        so.FindProperty("measuredRestitutionText").objectReferenceValue = refs.measuredRestitutionText;
+
+        // Buttons
+        so.FindProperty("launchButton").objectReferenceValue = refs.launchBtn;
+        so.FindProperty("resetButton").objectReferenceValue = refs.resetBtn;
+        so.FindProperty("backButton").objectReferenceValue = refs.backBtn;
+
+        so.ApplyModifiedProperties();
+        Debug.Log("[VRSceneBuilder] Successfully wired CollisionLabManager properties via SerializedObject.");
+    }
+
+    private static void UpdateBuildSettings(string vrScenePath)
+    {
+        var existingScenes = EditorBuildSettings.scenes;
+        var sceneList = new List<EditorBuildSettingsScene>();
+
+        bool hasMain = false;
+        bool hasCollisionDesktop = false;
+        bool hasVR = false;
+
+        foreach (var s in existingScenes)
+        {
+            if (s.path == "Assets/Scenes/MainScene.unity")
+            {
+                hasMain = true;
+                sceneList.Add(s);
+            }
+            else if (s.path == "Assets/Scenes/CollisionLab.unity")
+            {
+                hasCollisionDesktop = true;
+                sceneList.Add(s);
+            }
+            else if (s.path == vrScenePath)
+            {
+                hasVR = true;
+            }
+        }
+
+        if (!hasMain)
+        {
+            sceneList.Insert(0, new EditorBuildSettingsScene("Assets/Scenes/MainScene.unity", true));
+        }
+
+        if (!hasCollisionDesktop)
+        {
+            sceneList.Add(new EditorBuildSettingsScene("Assets/Scenes/CollisionLab.unity", true));
+        }
+
+        sceneList.Add(new EditorBuildSettingsScene(vrScenePath, true));
+
+        EditorBuildSettings.scenes = sceneList.ToArray();
+
+        Debug.Log("[VRSceneBuilder] Updated EditorBuildSettings. Total scenes: " + EditorBuildSettings.scenes.Length);
+        for (int i = 0; i < EditorBuildSettings.scenes.Length; i++)
+        {
+            Debug.Log($"  [{i}] {EditorBuildSettings.scenes[i].path} (Enabled: {EditorBuildSettings.scenes[i].enabled})");
+        }
+    }
+}
+
+========== CollisionLabManager.cs ==========
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+namespace CollisionLab
+{
+    public enum SimulationState
+    {
+        Ready,
+        InMotion,
+        Collided
+    }
+
+    /// <summary>
+    /// Controls the 3D interactive collision-physics laboratory for CGVR.
+    /// Manages launch parameters, Rigidbody masses, coefficient of restitution,
+    /// dynamic velocity vectors, collision manifold visualization, and vector momentum conservation analysis.
+    /// </summary>
+    public class CollisionLabManager : MonoBehaviour
+    {
+        public static CollisionLabManager Instance { get; private set; }
+
+        [Header("Physical Demonstration Objects")]
+        [SerializeField] private CollisionObject sphereObject;
+        [SerializeField] private CollisionObject cubeObject;
+        [SerializeField] private Rigidbody sphereRigidbody;
+        [SerializeField] private Rigidbody cubeRigidbody;
+
+        [Header("3D Physics Visualizers")]
+        [SerializeField] private PhysicsVectorVisualizer sphereVectorVisualizer;
+        [SerializeField] private PhysicsVectorVisualizer cubeVectorVisualizer;
+        [SerializeField] private ContactManifoldVisualizer contactVisualizer;
+
+        [Header("Launch & Physics Parameters")]
+        [SerializeField] private float launchVelocity = 8.0f;
+        [SerializeField] private Vector3 launchDirection = new Vector3(1f, 0f, 0f);
+        [SerializeField] private float sphereMass = 1.0f;
+        [SerializeField] private float cubeMass = 1.0f;
+        [SerializeField] private float restitution = 0.85f;
+
+        [Header("Physics Configuration UI Sliders & Controls")]
+        [SerializeField] private Slider speedSlider;
+        [SerializeField] private Text speedValueText;
+        [SerializeField] private Button speedDownButton;
+        [SerializeField] private Button speedUpButton;
+
+        [SerializeField] private Slider sphereMassSlider;
+        [SerializeField] private Text sphereMassValueText;
+        [SerializeField] private Button sphereMassDownButton;
+        [SerializeField] private Button sphereMassUpButton;
+
+        [SerializeField] private Slider cubeMassSlider;
+        [SerializeField] private Text cubeMassValueText;
+        [SerializeField] private Button cubeMassDownButton;
+        [SerializeField] private Button cubeMassUpButton;
+
+        [SerializeField] private Slider restitutionSlider;
+        [SerializeField] private Text restitutionValueText;
+        [SerializeField] private Button restitutionDownButton;
+        [SerializeField] private Button restitutionUpButton;
+
+        [Header("Physics Presets")]
+        [SerializeField] private Button presetEqualButton;
+        [SerializeField] private Button presetHeavyImpactorButton;
+        [SerializeField] private Button presetHeavyTargetButton;
+        [SerializeField] private Button presetElasticButton;
+        [SerializeField] private Button presetInelasticButton;
+
+        [Header("Telemetry UI Text Elements")]
+        [SerializeField] private Text stateText;
+        [SerializeField] private Text impactCountText;
+        [SerializeField] private Text relativeVelocityText;
+        [SerializeField] private Text impulseText;
+        [SerializeField] private Text contactPointText;
+        [SerializeField] private Text contactNormalText;
+        [SerializeField] private Text momentumBeforeText;
+        [SerializeField] private Text momentumAfterText;
+        [SerializeField] private Text momentumErrorText;
+        [SerializeField] private Text kineticEnergyText;
+        [SerializeField] private Text measuredRestitutionText;
+
+        [Header("UI Buttons & Panels")]
+        [SerializeField] private Button launchButton;
+        [SerializeField] private Button resetButton;
+        [SerializeField] private Button backButton;
+        [SerializeField] private Button telemetryButton;
+        [SerializeField] private GameObject telemetryPanel;
+        [SerializeField] private GameObject configPanel;
+
+        public SimulationState CurrentState => _currentState;
+        private SimulationState _currentState = SimulationState.Ready;
+        private int _impactCount = 0;
+
+        // Cached pre-impact physics velocities
+        private Vector3 _preImpactSphereVel = Vector3.zero;
+        private Vector3 _preImpactCubeVel = Vector3.zero;
+        private Vector3 _lastFixedSphereVel = Vector3.zero;
+        private Vector3 _lastFixedCubeVel = Vector3.zero;
+
+        // Per-physics-event deduplication without artificial cooldowns
+        private readonly Dictionary<int, int> _lastPhysicsTickByPair = new Dictionary<int, int>();
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+        }
+
+        private void Start()
+        {
+            // Wire buttons
+            if (launchButton != null) launchButton.onClick.AddListener(LaunchSphere);
+            if (resetButton != null) resetButton.onClick.AddListener(ResetSimulation);
+            if (backButton != null) backButton.onClick.AddListener(ReturnToMainScene);
+            if (telemetryButton != null) telemetryButton.onClick.AddListener(ToggleTelemetry);
+
+            if (speedDownButton != null) speedDownButton.onClick.AddListener(() => AdjustSpeed(-1.0f));
+            if (speedUpButton != null) speedUpButton.onClick.AddListener(() => AdjustSpeed(1.0f));
+
+            if (sphereMassDownButton != null) sphereMassDownButton.onClick.AddListener(() => AdjustSphereMass(-0.5f));
+            if (sphereMassUpButton != null) sphereMassUpButton.onClick.AddListener(() => AdjustSphereMass(0.5f));
+
+            if (cubeMassDownButton != null) cubeMassDownButton.onClick.AddListener(() => AdjustCubeMass(-0.5f));
+            if (cubeMassUpButton != null) cubeMassUpButton.onClick.AddListener(() => AdjustCubeMass(0.5f));
+
+            if (restitutionDownButton != null) restitutionDownButton.onClick.AddListener(() => AdjustRestitution(-0.1f));
+            if (restitutionUpButton != null) restitutionUpButton.onClick.AddListener(() => AdjustRestitution(0.1f));
+
+            if (presetEqualButton != null) presetEqualButton.onClick.AddListener(() => ApplyPreset("Equal"));
+            if (presetHeavyImpactorButton != null) presetHeavyImpactorButton.onClick.AddListener(() => ApplyPreset("HeavyImpactor"));
+            if (presetHeavyTargetButton != null) presetHeavyTargetButton.onClick.AddListener(() => ApplyPreset("HeavyTarget"));
+            if (presetElasticButton != null) presetElasticButton.onClick.AddListener(() => ApplyPreset("Elastic"));
+            if (presetInelasticButton != null) presetInelasticButton.onClick.AddListener(() => ApplyPreset("Inelastic"));
+
+            // Wire sliders
+            SetupSliders();
+
+            // Apply initial physics parameters
+            ApplyPhysicsConfiguration();
+
+            // Ensure visualizer references
+            EnsureVisualizers();
+
+            ResetSimulation();
+        }
+
+        private void SetupSliders()
+        {
+            if (speedSlider != null)
+            {
+                speedSlider.minValue = 2.0f;
+                speedSlider.maxValue = 20.0f;
+                speedSlider.value = launchVelocity;
+                speedSlider.onValueChanged.AddListener(OnSpeedSliderChanged);
+                OnSpeedSliderChanged(launchVelocity);
+            }
+
+            if (sphereMassSlider != null)
+            {
+                sphereMassSlider.minValue = 0.2f;
+                sphereMassSlider.maxValue = 5.0f;
+                sphereMassSlider.value = sphereMass;
+                sphereMassSlider.onValueChanged.AddListener(OnSphereMassSliderChanged);
+                OnSphereMassSliderChanged(sphereMass);
+            }
+
+            if (cubeMassSlider != null)
+            {
+                cubeMassSlider.minValue = 0.2f;
+                cubeMassSlider.maxValue = 5.0f;
+                cubeMassSlider.value = cubeMass;
+                cubeMassSlider.onValueChanged.AddListener(OnCubeMassSliderChanged);
+                OnCubeMassSliderChanged(cubeMass);
+            }
+
+            if (restitutionSlider != null)
+            {
+                restitutionSlider.minValue = 0.0f;
+                restitutionSlider.maxValue = 1.0f;
+                restitutionSlider.value = restitution;
+                restitutionSlider.onValueChanged.AddListener(OnRestitutionSliderChanged);
+                OnRestitutionSliderChanged(restitution);
+            }
+        }
+
+        private void EnsureVisualizers()
+        {
+            if (sphereVectorVisualizer == null && sphereObject != null)
+            {
+                sphereVectorVisualizer = sphereObject.GetComponent<PhysicsVectorVisualizer>();
+                if (sphereVectorVisualizer == null)
+                {
+                    sphereVectorVisualizer = sphereObject.gameObject.AddComponent<PhysicsVectorVisualizer>();
+                    sphereVectorVisualizer.VectorColor = new Color(0.0f, 0.9f, 1.0f, 1.0f); // Bright Cyan
+                }
+            }
+
+            if (cubeVectorVisualizer == null && cubeObject != null)
+            {
+                cubeVectorVisualizer = cubeObject.GetComponent<PhysicsVectorVisualizer>();
+                if (cubeVectorVisualizer == null)
+                {
+                    cubeVectorVisualizer = cubeObject.gameObject.AddComponent<PhysicsVectorVisualizer>();
+                    cubeVectorVisualizer.VectorColor = new Color(1.0f, 0.85f, 0.2f, 1.0f); // Bright Amber
+                }
+            }
+
+            if (contactVisualizer == null)
+            {
+                contactVisualizer = FindObjectOfType<ContactManifoldVisualizer>();
+                if (contactVisualizer == null)
+                {
+                    var go = new GameObject("ContactManifoldVisualizer");
+                    contactVisualizer = go.AddComponent<ContactManifoldVisualizer>();
+                }
+            }
+        }
+
+        private void OnSpeedSliderChanged(float val)
+        {
+            launchVelocity = val;
+            if (speedValueText != null)
+            {
+                speedValueText.text = $"{val:F1} m/s";
+            }
+        }
+
+        private void OnSphereMassSliderChanged(float val)
+        {
+            sphereMass = val;
+            if (sphereMassValueText != null)
+            {
+                sphereMassValueText.text = $"{val:F1} kg";
+            }
+            if (sphereObject != null) sphereObject.SetMass(val);
+        }
+
+        private void OnCubeMassSliderChanged(float val)
+        {
+            cubeMass = val;
+            if (cubeMassValueText != null)
+            {
+                cubeMassValueText.text = $"{val:F1} kg";
+            }
+            if (cubeObject != null) cubeObject.SetMass(val);
+        }
+
+        private void OnRestitutionSliderChanged(float val)
+        {
+            restitution = val;
+            if (restitutionValueText != null)
+            {
+                restitutionValueText.text = $"{val:F2}";
+            }
+            if (sphereObject != null) sphereObject.SetBounciness(val);
+            if (cubeObject != null) cubeObject.SetBounciness(val);
+        }
+
+        public void AdjustSpeed(float delta) => SetSpeed(Mathf.Clamp(launchVelocity + delta, 2.0f, 20.0f));
+        public void AdjustSphereMass(float delta) => SetSphereMass(Mathf.Clamp(sphereMass + delta, 0.2f, 5.0f));
+        public void AdjustCubeMass(float delta) => SetCubeMass(Mathf.Clamp(cubeMass + delta, 0.2f, 5.0f));
+        public void AdjustRestitution(float delta) => SetRestitution(Mathf.Clamp01(restitution + delta));
+
+        public void SetSpeed(float val)
+        {
+            launchVelocity = val;
+            if (speedSlider != null) speedSlider.value = val;
+            if (speedValueText != null) speedValueText.text = $"{val:F1} m/s";
+        }
+
+        public void SetSphereMass(float val)
+        {
+            sphereMass = val;
+            if (sphereMassSlider != null) sphereMassSlider.value = val;
+            if (sphereMassValueText != null) sphereMassValueText.text = $"{val:F1} kg";
+            if (sphereObject != null) sphereObject.SetMass(val);
+        }
+
+        public void SetCubeMass(float val)
+        {
+            cubeMass = val;
+            if (cubeMassSlider != null) cubeMassSlider.value = val;
+            if (cubeMassValueText != null) cubeMassValueText.text = $"{val:F1} kg";
+            if (cubeObject != null) cubeObject.SetMass(val);
+        }
+
+        public void SetRestitution(float val)
+        {
+            restitution = val;
+            if (restitutionSlider != null) restitutionSlider.value = val;
+            if (restitutionValueText != null) restitutionValueText.text = $"{val:F2}";
+            if (sphereObject != null) sphereObject.SetBounciness(val);
+            if (cubeObject != null) cubeObject.SetBounciness(val);
+        }
+
+        public void ApplyPreset(string presetName)
+        {
+            switch (presetName)
+            {
+                case "Equal":
+                    SetSphereMass(1.0f);
+                    SetCubeMass(1.0f);
+                    break;
+                case "HeavyImpactor":
+                    SetSphereMass(3.0f);
+                    SetCubeMass(1.0f);
+                    break;
+                case "HeavyTarget":
+                    SetSphereMass(1.0f);
+                    SetCubeMass(3.0f);
+                    break;
+                case "Elastic":
+                    SetRestitution(1.0f);
+                    break;
+                case "Inelastic":
+                    SetRestitution(0.0f);
+                    break;
+            }
+        }
+
+        private void ApplyPhysicsConfiguration()
+        {
+            if (sphereObject != null)
+            {
+                sphereObject.SetMass(sphereMass);
+                sphereObject.SetBounciness(restitution);
+            }
+
+            if (cubeObject != null)
+            {
+                cubeObject.SetMass(cubeMass);
+                cubeObject.SetBounciness(restitution);
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            // Sample pre-collision velocities each physics step during motion
+            if (_currentState == SimulationState.InMotion)
+            {
+                if (sphereRigidbody != null) _lastFixedSphereVel = sphereRigidbody.velocity;
+                if (cubeRigidbody != null) _lastFixedCubeVel = cubeRigidbody.velocity;
+            }
+        }
+
+        private void Update()
+        {
+            // Space: Launch sphere
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                LaunchSphere();
+            }
+
+            // R: Reset simulation
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                ResetSimulation();
+            }
+
+            // T or C: Toggle floating telemetry panel
+            if (Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown(KeyCode.C))
+            {
+                ToggleTelemetry();
+            }
+
+            // Esc: Return to MainScene
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                ReturnToMainScene();
+            }
+        }
+
+        /// <summary>
+        /// Launches the sphere with a direct linear velocity impulse.
+        /// This ensures the initial launch speed is strictly independent of the sphere's mass.
+        /// </summary>
+        public void LaunchSphere()
+        {
+            if (sphereRigidbody == null) return;
+
+            ApplyPhysicsConfiguration();
+
+            // Clear any lingering velocities
+            sphereRigidbody.velocity = Vector3.zero;
+            sphereRigidbody.angularVelocity = Vector3.zero;
+            if (cubeRigidbody != null)
+            {
+                cubeRigidbody.velocity = Vector3.zero;
+                cubeRigidbody.angularVelocity = Vector3.zero;
+            }
+
+            if (contactVisualizer != null) contactVisualizer.Clear();
+
+            // Direct linear velocity assignment guarantees mass-independence
+            var dir = launchDirection.normalized;
+            sphereRigidbody.velocity = dir * launchVelocity;
+
+            _lastFixedSphereVel = sphereRigidbody.velocity;
+            _lastFixedCubeVel = Vector3.zero;
+            _preImpactSphereVel = _lastFixedSphereVel;
+            _preImpactCubeVel = Vector3.zero;
+
+            _currentState = SimulationState.InMotion;
+            UpdateTelemetryState();
+        }
+
+        /// <summary>
+        /// Callback triggered by CollisionObject on physical contact.
+        /// Deduplicates multi-body callbacks using pair-hash and physics step deduplication,
+        /// avoiding artificial cooldowns while guaranteeing exactly one count per physical collision.
+        /// </summary>
+        public void ReportCollision(CollisionObject source, Collision collision)
+        {
+            if (source == null || collision == null || collision.gameObject == null) return;
+
+            int idA = source.gameObject.GetInstanceID();
+            int idB = collision.gameObject.GetInstanceID();
+
+            int minId = idA < idB ? idA : idB;
+            int maxId = idA < idB ? idB : idA;
+            int pairKey = unchecked((minId * 397) ^ maxId);
+
+            int currentStep = Time.frameCount;
+            if (_lastPhysicsTickByPair.TryGetValue(pairKey, out int lastStep) && lastStep == currentStep)
+            {
+                return;
+            }
+
+            _lastPhysicsTickByPair[pairKey] = currentStep;
+            _impactCount++;
+            _currentState = SimulationState.Collided;
+
+            // Capture pre-impact velocities from the physics step before impact
+            var v1i = _lastFixedSphereVel.sqrMagnitude > 0.01f ? _lastFixedSphereVel : launchDirection.normalized * launchVelocity;
+            var v2i = _lastFixedCubeVel;
+
+            // Extract contact manifold
+            var contactPoint = Vector3.zero;
+            var contactNormal = Vector3.zero;
+            if (collision.contactCount > 0)
+            {
+                var contact = collision.GetContact(0);
+                contactPoint = contact.point;
+                contactNormal = contact.normal;
+            }
+
+            // Extract PhysX relative velocity & impulse
+            var relVel = collision.relativeVelocity.magnitude;
+            var impulse = collision.impulse.magnitude;
+
+            // Visual contact marker & normal line
+            if (contactVisualizer != null)
+            {
+                contactVisualizer.ShowContact(contactPoint, contactNormal);
+            }
+
+            // Sample post-impact velocities across the collision resolution
+            StartCoroutine(CapturePostCollisionData(v1i, v2i, relVel, impulse, contactPoint, contactNormal));
+        }
+
+        private IEnumerator CapturePostCollisionData(Vector3 v1i, Vector3 v2i, float relVel, float impulse, Vector3 contactPoint, Vector3 contactNormal)
+        {
+            // Wait for FixedUpdate to ensure PhysX collision solver has fully integrated post-impact velocities
+            yield return new WaitForFixedUpdate();
+
+            var v1f = (sphereRigidbody != null) ? sphereRigidbody.velocity : Vector3.zero;
+            var v2f = (cubeRigidbody != null) ? cubeRigidbody.velocity : Vector3.zero;
+
+            // 1. Vector Momentum Conservation Analysis
+            // p = m1*v1 + m2*v2
+            var pInitial = sphereMass * v1i + cubeMass * v2i;
+            var pFinal = sphereMass * v1f + cubeMass * v2f;
+            var pDelta = pFinal - pInitial;
+
+            float pInitMag = pInitial.magnitude;
+            float pErrorPercent = (pInitMag > 0.001f) ? (pDelta.magnitude / pInitMag) * 100f : 0f;
+
+            // 2. Kinetic Energy Analysis
+            // KE = 0.5 * m * v^2
+            float keInitial = 0.5f * sphereMass * v1i.sqrMagnitude + 0.5f * cubeMass * v2i.sqrMagnitude;
+            float keFinal = 0.5f * sphereMass * v1f.sqrMagnitude + 0.5f * cubeMass * v2f.sqrMagnitude;
+            float deltaKE = keFinal - keInitial;
+            float keRetainedPercent = (keInitial > 0.001f) ? (keFinal / keInitial) * 100f : 0f;
+
+            // 3. Coefficient of Restitution along Contact Normal
+            // e = - (v1f - v2f) · n / ((v1i - v2i) · n)
+            var norm = contactNormal.normalized;
+            if (norm.sqrMagnitude < 0.001f) norm = Vector3.right;
+
+            // Approach relative speed along normal
+            float approachSpeed = Vector3.Dot(v1i - v2i, -norm);
+            if (approachSpeed < 0.001f) approachSpeed = Vector3.Dot(v1i - v2i, norm);
+            approachSpeed = Mathf.Abs(approachSpeed);
+
+            // Separation relative speed along normal
+            float separationSpeed = Vector3.Dot(v2f - v1f, -norm);
+            if (separationSpeed < 0.001f) separationSpeed = Vector3.Dot(v2f - v1f, norm);
+            separationSpeed = Mathf.Abs(separationSpeed);
+
+            float measuredRestitution = (approachSpeed > 0.05f) ? (separationSpeed / approachSpeed) : restitution;
+            measuredRestitution = Mathf.Clamp(measuredRestitution, 0f, 1.2f);
+
+            // Update UI telemetry displays
+            UpdateTelemetryCollision(relVel, impulse, contactPoint, contactNormal, pInitial, pFinal, pErrorPercent, keInitial, keFinal, deltaKE, keRetainedPercent, measuredRestitution);
+        }
+
+        /// <summary>
+        /// Resets positions, rotations, linear/angular velocities, colors, and telemetry.
+        /// Preserves the user-selected slider configuration values.
+        /// </summary>
+        public void ResetSimulation()
+        {
+            _currentState = SimulationState.Ready;
+            _impactCount = 0;
+            _lastPhysicsTickByPair.Clear();
+
+            _lastFixedSphereVel = Vector3.zero;
+            _lastFixedCubeVel = Vector3.zero;
+            _preImpactSphereVel = Vector3.zero;
+            _preImpactCubeVel = Vector3.zero;
+
+            if (sphereObject != null) sphereObject.ResetToInitialState();
+            if (cubeObject != null) cubeObject.ResetToInitialState();
+
+            if (sphereRigidbody != null)
+            {
+                sphereRigidbody.velocity = Vector3.zero;
+                sphereRigidbody.angularVelocity = Vector3.zero;
+            }
+
+            if (cubeRigidbody != null)
+            {
+                cubeRigidbody.velocity = Vector3.zero;
+                cubeRigidbody.angularVelocity = Vector3.zero;
+            }
+
+            if (sphereVectorVisualizer != null) sphereVectorVisualizer.ClearVector();
+            if (cubeVectorVisualizer != null) cubeVectorVisualizer.ClearVector();
+            if (contactVisualizer != null) contactVisualizer.Clear();
+
+            // Reapply current slider configuration
+            ApplyPhysicsConfiguration();
+
+            UpdateTelemetryReset();
+        }
+
+        public void ReturnToMainScene()
+        {
+            SceneManager.LoadScene("MainScene");
+        }
+
+        public void ToggleTelemetry()
+        {
+            if (telemetryPanel != null)
+            {
+                telemetryPanel.SetActive(!telemetryPanel.activeSelf);
+            }
+        }
+
+        private void UpdateTelemetryState()
+        {
+            if (stateText != null)
+            {
+                stateText.text = $"<color=#00E5FF>{_currentState.ToString().ToUpper()}</color>";
+            }
+        }
+
+        private void UpdateTelemetryCollision(float relVel, float impulse, Vector3 contactPoint, Vector3 contactNormal,
+            Vector3 pInitial, Vector3 pFinal, float pErrorPercent, float keInitial, float keFinal, float deltaKE, float keRetainedPercent, float measuredRestitution)
+        {
+            if (stateText != null)
+            {
+                stateText.text = $"<color=#00E676>{_currentState.ToString().ToUpper()}</color>";
+            }
+
+            if (impactCountText != null)
+            {
+                impactCountText.text = _impactCount.ToString();
+            }
+
+            if (relativeVelocityText != null)
+            {
+                relativeVelocityText.text = $"{relVel:F2} m/s";
+            }
+
+            if (impulseText != null)
+            {
+                impulseText.text = $"{impulse:F2} N·s";
+            }
+
+            if (contactPointText != null)
+            {
+                contactPointText.text = $"({contactPoint.x:F2}, {contactPoint.y:F2}, {contactPoint.z:F2})";
+            }
+
+            if (contactNormalText != null)
+            {
+                contactNormalText.text = $"({contactNormal.x:F2}, {contactNormal.y:F2}, {contactNormal.z:F2})";
+            }
+
+            if (momentumBeforeText != null)
+            {
+                momentumBeforeText.text = $"{pInitial.x:F2} kg·m/s";
+            }
+
+            if (momentumAfterText != null)
+            {
+                momentumAfterText.text = $"{pFinal.x:F2} kg·m/s";
+            }
+
+            if (momentumErrorText != null)
+            {
+                var color = pErrorPercent < 3.0f ? "#00E676" : "#FFAB00";
+                momentumErrorText.text = $"<color={color}>Δp: {pErrorPercent:F1}%</color>";
+            }
+
+            if (kineticEnergyText != null)
+            {
+                kineticEnergyText.text = $"{keInitial:F1}J → {keFinal:F1}J ({deltaKE:+0.0;-0.0}J, {keRetainedPercent:F0}%)";
+            }
+
+            if (measuredRestitutionText != null)
+            {
+                measuredRestitutionText.text = $"e = {measuredRestitution:F2} (target: {restitution:F2})";
+            }
+        }
+
+        private void UpdateTelemetryReset()
+        {
+            if (stateText != null)
+            {
+                stateText.text = $"<color=#B0BEC5>{_currentState.ToString().ToUpper()}</color>";
+            }
+
+            if (impactCountText != null)
+            {
+                impactCountText.text = "0";
+            }
+
+            if (relativeVelocityText != null)
+            {
+                relativeVelocityText.text = "-- m/s";
+            }
+
+            if (impulseText != null)
+            {
+                impulseText.text = "-- N·s";
+            }
+
+            if (contactPointText != null)
+            {
+                contactPointText.text = "(--, --, --)";
+            }
+
+            if (contactNormalText != null)
+            {
+                contactNormalText.text = "(--, --, --)";
+            }
+
+            if (momentumBeforeText != null)
+            {
+                momentumBeforeText.text = "-- kg·m/s";
+            }
+
+            if (momentumAfterText != null)
+            {
+                momentumAfterText.text = "-- kg·m/s";
+            }
+
+            if (momentumErrorText != null)
+            {
+                momentumErrorText.text = "--";
+            }
+
+            if (kineticEnergyText != null)
+            {
+                kineticEnergyText.text = "-- J";
+            }
+
+            if (measuredRestitutionText != null)
+            {
+                measuredRestitutionText.text = $"e = -- (target: {restitution:F2})";
+            }
+        }
+    }
+}
+
+========== VR SCENE COMPONENT MATCHES ==========
+
+  Assets\Scenes\CollisionLab_VR.unity:329:  m_InteractionManager: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:330:  m_Colliders: []
+  Assets\Scenes\CollisionLab_VR.unity:331:  m_InteractionLayerMask:
+  Assets\Scenes\CollisionLab_VR.unity:332:    serializedVersion: 2
+  Assets\Scenes\CollisionLab_VR.unity:333:    m_Bits: 4294967295
+> Assets\Scenes\CollisionLab_VR.unity:334:  m_InteractionLayers:
+  Assets\Scenes\CollisionLab_VR.unity:335:    m_Bits: 1
+  Assets\Scenes\CollisionLab_VR.unity:336:  m_DistanceCalculationMode: 1
+  Assets\Scenes\CollisionLab_VR.unity:337:  m_SelectMode: 1
+  Assets\Scenes\CollisionLab_VR.unity:338:  m_FocusMode: 1
+  Assets\Scenes\CollisionLab_VR.unity:339:  m_CustomReticle: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:340:  m_AllowGazeInteraction: 0
+  Assets\Scenes\CollisionLab_VR.unity:341:  m_AllowGazeSelect: 0
+  Assets\Scenes\CollisionLab_VR.unity:342:  m_OverrideGazeTimeToSelect: 0
+  Assets\Scenes\CollisionLab_VR.unity:343:  m_GazeTimeToSelect: 0.5
+  Assets\Scenes\CollisionLab_VR.unity:344:  m_OverrideTimeToAutoDeselectGaze: 0
+  Assets\Scenes\CollisionLab_VR.unity:345:  m_TimeToAutoDeselectGaze: 3
+  Assets\Scenes\CollisionLab_VR.unity:346:  m_AllowGazeAssistance: 0
+  Assets\Scenes\CollisionLab_VR.unity:619:  - component: {fileID: 64}
+  Assets\Scenes\CollisionLab_VR.unity:620:  - component: {fileID: 65}
+  Assets\Scenes\CollisionLab_VR.unity:621:  - component: {fileID: 66}
+  Assets\Scenes\CollisionLab_VR.unity:622:  - component: {fileID: 68}
+  Assets\Scenes\CollisionLab_VR.unity:623:  m_Layer: 0
+> Assets\Scenes\CollisionLab_VR.unity:624:  m_Name: Sphere
+  Assets\Scenes\CollisionLab_VR.unity:625:  m_TagString: Untagged
+  Assets\Scenes\CollisionLab_VR.unity:626:  m_Icon: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:627:  m_NavMeshLayer: 0
+  Assets\Scenes\CollisionLab_VR.unity:628:  m_StaticEditorFlags: 0
+  Assets\Scenes\CollisionLab_VR.unity:629:  m_IsActive: 1
+  Assets\Scenes\CollisionLab_VR.unity:630:--- !u!4 &61
+  Assets\Scenes\CollisionLab_VR.unity:631:Transform:
+  Assets\Scenes\CollisionLab_VR.unity:632:  m_ObjectHideFlags: 0
+  Assets\Scenes\CollisionLab_VR.unity:633:  m_CorrespondingSourceObject: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:634:  m_PrefabInstance: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:635:  m_PrefabAsset: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:636:  m_GameObject: {fileID: 60}
+  Assets\Scenes\CollisionLab_VR.unity:770:  - component: {fileID: 74}
+  Assets\Scenes\CollisionLab_VR.unity:771:  - component: {fileID: 75}
+  Assets\Scenes\CollisionLab_VR.unity:772:  - component: {fileID: 76}
+  Assets\Scenes\CollisionLab_VR.unity:773:  - component: {fileID: 78}
+  Assets\Scenes\CollisionLab_VR.unity:774:  m_Layer: 0
+> Assets\Scenes\CollisionLab_VR.unity:775:  m_Name: Cube
+  Assets\Scenes\CollisionLab_VR.unity:776:  m_TagString: Untagged
+  Assets\Scenes\CollisionLab_VR.unity:777:  m_Icon: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:778:  m_NavMeshLayer: 0
+  Assets\Scenes\CollisionLab_VR.unity:779:  m_StaticEditorFlags: 0
+  Assets\Scenes\CollisionLab_VR.unity:780:  m_IsActive: 1
+  Assets\Scenes\CollisionLab_VR.unity:781:--- !u!4 &71
+  Assets\Scenes\CollisionLab_VR.unity:782:Transform:
+  Assets\Scenes\CollisionLab_VR.unity:783:  m_ObjectHideFlags: 0
+  Assets\Scenes\CollisionLab_VR.unity:784:  m_CorrespondingSourceObject: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:785:  m_PrefabInstance: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:786:  m_PrefabAsset: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:787:  m_GameObject: {fileID: 70}
+  Assets\Scenes\CollisionLab_VR.unity:2162:  m_PrefabAsset: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:2163:  serializedVersion: 6
+  Assets\Scenes\CollisionLab_VR.unity:2164:  m_Component:
+  Assets\Scenes\CollisionLab_VR.unity:2165:  - component: {fileID: 313603220}
+  Assets\Scenes\CollisionLab_VR.unity:2166:  m_Layer: 0
+> Assets\Scenes\CollisionLab_VR.unity:2167:  m_Name: SphereMassRow
+  Assets\Scenes\CollisionLab_VR.unity:2168:  m_TagString: Untagged
+  Assets\Scenes\CollisionLab_VR.unity:2169:  m_Icon: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:2170:  m_NavMeshLayer: 0
+  Assets\Scenes\CollisionLab_VR.unity:2171:  m_StaticEditorFlags: 0
+  Assets\Scenes\CollisionLab_VR.unity:2172:  m_IsActive: 1
+  Assets\Scenes\CollisionLab_VR.unity:2173:--- !u!224 &313603220
+  Assets\Scenes\CollisionLab_VR.unity:2174:RectTransform:
+  Assets\Scenes\CollisionLab_VR.unity:2175:  m_ObjectHideFlags: 0
+  Assets\Scenes\CollisionLab_VR.unity:2176:  m_CorrespondingSourceObject: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:2177:  m_PrefabInstance: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:2178:  m_PrefabAsset: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:2179:  m_GameObject: {fileID: 313603219}
+  Assets\Scenes\CollisionLab_VR.unity:2810:  - component: {fileID: 523678167}
+  Assets\Scenes\CollisionLab_VR.unity:2811:  - component: {fileID: 523678166}
+  Assets\Scenes\CollisionLab_VR.unity:2812:  - component: {fileID: 523678165}
+  Assets\Scenes\CollisionLab_VR.unity:2813:  - component: {fileID: 523678164}
+  Assets\Scenes\CollisionLab_VR.unity:2814:  m_Layer: 0
+> Assets\Scenes\CollisionLab_VR.unity:2815:  m_Name: VRCalibrationCube
+  Assets\Scenes\CollisionLab_VR.unity:2816:  m_TagString: Untagged
+  Assets\Scenes\CollisionLab_VR.unity:2817:  m_Icon: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:2818:  m_NavMeshLayer: 0
+  Assets\Scenes\CollisionLab_VR.unity:2819:  m_StaticEditorFlags: 0
+  Assets\Scenes\CollisionLab_VR.unity:2820:  m_IsActive: 1
+  Assets\Scenes\CollisionLab_VR.unity:2821:--- !u!114 &523678164
+  Assets\Scenes\CollisionLab_VR.unity:2822:MonoBehaviour:
+  Assets\Scenes\CollisionLab_VR.unity:2823:  m_ObjectHideFlags: 0
+  Assets\Scenes\CollisionLab_VR.unity:2824:  m_CorrespondingSourceObject: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:2825:  m_PrefabInstance: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:2826:  m_PrefabAsset: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:2827:  m_GameObject: {fileID: 523678163}
+  Assets\Scenes\CollisionLab_VR.unity:2833:  m_InteractionManager: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:2834:  m_Colliders: []
+  Assets\Scenes\CollisionLab_VR.unity:2835:  m_InteractionLayerMask:
+  Assets\Scenes\CollisionLab_VR.unity:2836:    serializedVersion: 2
+  Assets\Scenes\CollisionLab_VR.unity:2837:    m_Bits: 4294967295
+> Assets\Scenes\CollisionLab_VR.unity:2838:  m_InteractionLayers:
+  Assets\Scenes\CollisionLab_VR.unity:2839:    m_Bits: 1
+  Assets\Scenes\CollisionLab_VR.unity:2840:  m_DistanceCalculationMode: 1
+  Assets\Scenes\CollisionLab_VR.unity:2841:  m_SelectMode: 0
+  Assets\Scenes\CollisionLab_VR.unity:2842:  m_FocusMode: 1
+  Assets\Scenes\CollisionLab_VR.unity:2843:  m_CustomReticle: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:2844:  m_AllowGazeInteraction: 0
+  Assets\Scenes\CollisionLab_VR.unity:2845:  m_AllowGazeSelect: 0
+  Assets\Scenes\CollisionLab_VR.unity:2846:  m_OverrideGazeTimeToSelect: 0
+  Assets\Scenes\CollisionLab_VR.unity:2847:  m_GazeTimeToSelect: 0.5
+  Assets\Scenes\CollisionLab_VR.unity:2848:  m_OverrideTimeToAutoDeselectGaze: 0
+  Assets\Scenes\CollisionLab_VR.unity:2849:  m_TimeToAutoDeselectGaze: 3
+  Assets\Scenes\CollisionLab_VR.unity:2850:  m_AllowGazeAssistance: 0
+  Assets\Scenes\CollisionLab_VR.unity:5132:  m_PrefabAsset: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:5133:  serializedVersion: 6
+  Assets\Scenes\CollisionLab_VR.unity:5134:  m_Component:
+  Assets\Scenes\CollisionLab_VR.unity:5135:  - component: {fileID: 1112495867}
+  Assets\Scenes\CollisionLab_VR.unity:5136:  m_Layer: 0
+> Assets\Scenes\CollisionLab_VR.unity:5137:  m_Name: CubeMassRow
+  Assets\Scenes\CollisionLab_VR.unity:5138:  m_TagString: Untagged
+  Assets\Scenes\CollisionLab_VR.unity:5139:  m_Icon: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:5140:  m_NavMeshLayer: 0
+  Assets\Scenes\CollisionLab_VR.unity:5141:  m_StaticEditorFlags: 0
+  Assets\Scenes\CollisionLab_VR.unity:5142:  m_IsActive: 1
+  Assets\Scenes\CollisionLab_VR.unity:5143:--- !u!224 &1112495867
+  Assets\Scenes\CollisionLab_VR.unity:5144:RectTransform:
+  Assets\Scenes\CollisionLab_VR.unity:5145:  m_ObjectHideFlags: 0
+  Assets\Scenes\CollisionLab_VR.unity:5146:  m_CorrespondingSourceObject: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:5147:  m_PrefabInstance: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:5148:  m_PrefabAsset: {fileID: 0}
+  Assets\Scenes\CollisionLab_VR.unity:5149:  m_GameObject: {fileID: 1112495866}
+
+
+
